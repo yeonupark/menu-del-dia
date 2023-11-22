@@ -31,6 +31,7 @@ class SignUpView: BaseView {
     
     let pwField = {
         let view = UITextField()
+        view.isSecureTextEntry = true
         view.placeholder = "password"
         view.borderStyle = .roundedRect
         
@@ -39,6 +40,7 @@ class SignUpView: BaseView {
     
     let pwRepeatField = {
         let view = UITextField()
+        view.isSecureTextEntry = true
         view.placeholder = "password again"
         view.borderStyle = .roundedRect
         

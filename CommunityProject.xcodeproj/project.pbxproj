@@ -25,6 +25,8 @@
 		4849B3652B0A0DC800CBE244 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 4849B3642B0A0DC800CBE244 /* RxCocoa */; };
 		4849B3672B0A0DC800CBE244 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 4849B3662B0A0DC800CBE244 /* RxRelay */; };
 		4849B3692B0A0DC800CBE244 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4849B3682B0A0DC800CBE244 /* RxSwift */; };
+		48DA22A72B0E4D5E00A6FD56 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 48DA22A62B0E4D5E00A6FD56 /* Alamofire */; };
+		48DA22A92B0E4D7F00A6FD56 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA22A82B0E4D7F00A6FD56 /* APIKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,7 @@
 		4849B35D2B085B3C00CBE244 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		4849B35F2B08645000CBE244 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		4849B3612B0A0A6800CBE244 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		48DA22A82B0E4D7F00A6FD56 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48DA22A72B0E4D5E00A6FD56 /* Alamofire in Frameworks */,
 				4849B3672B0A0DC800CBE244 /* RxRelay in Frameworks */,
 				4849B3652B0A0DC800CBE244 /* RxCocoa in Frameworks */,
 				4849B3692B0A0DC800CBE244 /* RxSwift in Frameworks */,
@@ -126,6 +130,7 @@
 				4849B3182B035FBD00CBE244 /* Assets.xcassets */,
 				4849B31A2B035FBD00CBE244 /* LaunchScreen.storyboard */,
 				4849B31D2B035FBD00CBE244 /* Info.plist */,
+				48DA22A82B0E4D7F00A6FD56 /* APIKey.swift */,
 			);
 			path = CommunityProject;
 			sourceTree = "<group>";
@@ -195,6 +200,7 @@
 				4849B3642B0A0DC800CBE244 /* RxCocoa */,
 				4849B3662B0A0DC800CBE244 /* RxRelay */,
 				4849B3682B0A0DC800CBE244 /* RxSwift */,
+				48DA22A62B0E4D5E00A6FD56 /* Alamofire */,
 			);
 			productName = CommunityProject;
 			productReference = 4849B30C2B035FB800CBE244 /* CommunityProject.app */;
@@ -271,6 +277,7 @@
 			packageReferences = (
 				4849B3592B08551200CBE244 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				4849B3632B0A0DC800CBE244 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				48DA22A52B0E4D5E00A6FD56 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 4849B30D2B035FB800CBE244 /* Products */;
 			projectDirPath = "";
@@ -322,6 +329,7 @@
 				4849B3582B08547800CBE244 /* BaseView.swift in Sources */,
 				4849B3432B0362A900CBE244 /* LoginView.swift in Sources */,
 				4849B35E2B085B3C00CBE244 /* SignUpView.swift in Sources */,
+				48DA22A92B0E4D7F00A6FD56 /* APIKey.swift in Sources */,
 				4849B3122B035FB800CBE244 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -695,6 +703,14 @@
 				minimumVersion = 6.6.0;
 			};
 		};
+		48DA22A52B0E4D5E00A6FD56 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -717,6 +733,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4849B3632B0A0DC800CBE244 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
+		};
+		48DA22A62B0E4D5E00A6FD56 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 48DA22A52B0E4D5E00A6FD56 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

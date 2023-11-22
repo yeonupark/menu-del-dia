@@ -28,6 +28,7 @@
 		48DA22A72B0E4D5E00A6FD56 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 48DA22A62B0E4D5E00A6FD56 /* Alamofire */; };
 		48DA22AB2B0E509100A6FD56 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA22AA2B0E509100A6FD56 /* APIKeys.swift */; };
 		48DA22AD2B0E50A400A6FD56 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 48DA22AC2B0E50A400A6FD56 /* .gitignore */; };
+		48DA22AF2B0E517600A6FD56 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA22AE2B0E517600A6FD56 /* APIKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		4849B3612B0A0A6800CBE244 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		48DA22AA2B0E509100A6FD56 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		48DA22AC2B0E50A400A6FD56 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		48DA22AE2B0E517600A6FD56 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 				4849B31D2B035FBD00CBE244 /* Info.plist */,
 				48DA22AA2B0E509100A6FD56 /* APIKeys.swift */,
 				48DA22AC2B0E50A400A6FD56 /* .gitignore */,
+				48DA22AE2B0E517600A6FD56 /* APIKey.swift */,
 			);
 			path = CommunityProject;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				4849B3602B08645000CBE244 /* SignUpViewController.swift in Sources */,
 				4849B3622B0A0A6800CBE244 /* SignUpViewModel.swift in Sources */,
 				48DA22AB2B0E509100A6FD56 /* APIKeys.swift in Sources */,
+				48DA22AF2B0E517600A6FD56 /* APIKey.swift in Sources */,
 				4849B3102B035FB800CBE244 /* AppDelegate.swift in Sources */,
 				4849B3582B08547800CBE244 /* BaseView.swift in Sources */,
 				4849B3432B0362A900CBE244 /* LoginView.swift in Sources */,

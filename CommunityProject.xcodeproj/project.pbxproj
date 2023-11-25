@@ -25,9 +25,12 @@
 		4849B3652B0A0DC800CBE244 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 4849B3642B0A0DC800CBE244 /* RxCocoa */; };
 		4849B3672B0A0DC800CBE244 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 4849B3662B0A0DC800CBE244 /* RxRelay */; };
 		4849B3692B0A0DC800CBE244 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4849B3682B0A0DC800CBE244 /* RxSwift */; };
-		48DA22A72B0E4D5E00A6FD56 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 48DA22A62B0E4D5E00A6FD56 /* Alamofire */; };
 		48DA22AD2B0E50A400A6FD56 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 48DA22AC2B0E50A400A6FD56 /* .gitignore */; };
 		48DA22B12B0E522F00A6FD56 /* APIkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA22B02B0E522F00A6FD56 /* APIkey.swift */; };
+		48DA22B32B0E533900A6FD56 /* APIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA22B22B0E533900A6FD56 /* APIModel.swift */; };
+		48DA23022B0F384600A6FD56 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 48DA23012B0F384600A6FD56 /* Moya */; };
+		48DA23042B0F389E00A6FD56 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA23032B0F389E00A6FD56 /* API.swift */; };
+		48DA230E2B10406C00A6FD56 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA230D2B10406C00A6FD56 /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +71,9 @@
 		4849B3612B0A0A6800CBE244 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		48DA22AC2B0E50A400A6FD56 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		48DA22B02B0E522F00A6FD56 /* APIkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIkey.swift; sourceTree = "<group>"; };
+		48DA22B22B0E533900A6FD56 /* APIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModel.swift; sourceTree = "<group>"; };
+		48DA23032B0F389E00A6FD56 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		48DA230D2B10406C00A6FD56 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,8 +81,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48DA22A72B0E4D5E00A6FD56 /* Alamofire in Frameworks */,
 				4849B3672B0A0DC800CBE244 /* RxRelay in Frameworks */,
+				48DA23022B0F384600A6FD56 /* Moya in Frameworks */,
 				4849B3652B0A0DC800CBE244 /* RxCocoa in Frameworks */,
 				4849B3692B0A0DC800CBE244 /* RxSwift in Frameworks */,
 				4849B35B2B08551200CBE244 /* SnapKit in Frameworks */,
@@ -123,6 +129,7 @@
 		4849B30E2B035FB800CBE244 /* CommunityProject */ = {
 			isa = PBXGroup;
 			children = (
+				48DA22B42B0E533D00A6FD56 /* Network */,
 				4849B35C2B08595900CBE244 /* Join */,
 				4849B3562B08546E00CBE244 /* Base */,
 				4849B3412B0360E000CBE244 /* Login */,
@@ -159,6 +166,7 @@
 			children = (
 				4849B33F2B0360B600CBE244 /* LoginViewController.swift */,
 				4849B3422B0362A900CBE244 /* LoginView.swift */,
+				48DA230D2B10406C00A6FD56 /* LoginViewModel.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -177,9 +185,18 @@
 				4849B35D2B085B3C00CBE244 /* SignUpView.swift */,
 				4849B35F2B08645000CBE244 /* SignUpViewController.swift */,
 				4849B3612B0A0A6800CBE244 /* SignUpViewModel.swift */,
-				48DA22B02B0E522F00A6FD56 /* APIkey.swift */,
 			);
 			path = Join;
+			sourceTree = "<group>";
+		};
+		48DA22B42B0E533D00A6FD56 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				48DA22B02B0E522F00A6FD56 /* APIkey.swift */,
+				48DA22B22B0E533900A6FD56 /* APIModel.swift */,
+				48DA23032B0F389E00A6FD56 /* API.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,7 +220,7 @@
 				4849B3642B0A0DC800CBE244 /* RxCocoa */,
 				4849B3662B0A0DC800CBE244 /* RxRelay */,
 				4849B3682B0A0DC800CBE244 /* RxSwift */,
-				48DA22A62B0E4D5E00A6FD56 /* Alamofire */,
+				48DA23012B0F384600A6FD56 /* Moya */,
 			);
 			productName = CommunityProject;
 			productReference = 4849B30C2B035FB800CBE244 /* CommunityProject.app */;
@@ -280,7 +297,7 @@
 			packageReferences = (
 				4849B3592B08551200CBE244 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				4849B3632B0A0DC800CBE244 /* XCRemoteSwiftPackageReference "RxSwift" */,
-				48DA22A52B0E4D5E00A6FD56 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				48DA23002B0F384600A6FD56 /* XCRemoteSwiftPackageReference "Moya" */,
 			);
 			productRefGroup = 4849B30D2B035FB800CBE244 /* Products */;
 			projectDirPath = "";
@@ -326,12 +343,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48DA23042B0F389E00A6FD56 /* API.swift in Sources */,
 				4849B3402B0360B600CBE244 /* LoginViewController.swift in Sources */,
 				48DA22B12B0E522F00A6FD56 /* APIkey.swift in Sources */,
 				4849B3602B08645000CBE244 /* SignUpViewController.swift in Sources */,
 				4849B3622B0A0A6800CBE244 /* SignUpViewModel.swift in Sources */,
+				48DA22B32B0E533900A6FD56 /* APIModel.swift in Sources */,
 				4849B3102B035FB800CBE244 /* AppDelegate.swift in Sources */,
 				4849B3582B08547800CBE244 /* BaseView.swift in Sources */,
+				48DA230E2B10406C00A6FD56 /* LoginViewModel.swift in Sources */,
 				4849B3432B0362A900CBE244 /* LoginView.swift in Sources */,
 				4849B35E2B085B3C00CBE244 /* SignUpView.swift in Sources */,
 				4849B3122B035FB800CBE244 /* SceneDelegate.swift in Sources */,
@@ -707,12 +727,12 @@
 				minimumVersion = 6.6.0;
 			};
 		};
-		48DA22A52B0E4D5E00A6FD56 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+		48DA23002B0F384600A6FD56 /* XCRemoteSwiftPackageReference "Moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			repositoryURL = "https://github.com/Moya/Moya.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.8.1;
+				minimumVersion = 15.0.3;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -738,10 +758,10 @@
 			package = 4849B3632B0A0DC800CBE244 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
 		};
-		48DA22A62B0E4D5E00A6FD56 /* Alamofire */ = {
+		48DA23012B0F384600A6FD56 /* Moya */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 48DA22A52B0E4D5E00A6FD56 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
+			package = 48DA23002B0F384600A6FD56 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

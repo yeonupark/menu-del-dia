@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import Moya
 
 class SignUpViewModel {
     
@@ -17,7 +18,7 @@ class SignUpViewModel {
     let phoneNumber = BehaviorSubject(value: "")
     let birthday = BehaviorSubject(value: "")
     
-    let emailConfirmed = BehaviorSubject(value: false)
+    let emailConfirmed = BehaviorSubject(value: true)
     //let pwConfirmed = BehaviorSubject(value: false)
     
     let joinButtonEnabled = BehaviorSubject(value: false)
@@ -45,4 +46,51 @@ class SignUpViewModel {
             }
             .disposed(by: disposeBag)
     }
+    
+    private let provider = MoyaProvider<SeSacAPI>()
+    
+    func validateEmail(email: String) {
+        provider.request(.emailValidation(email: email)) { result in
+            switch result {
+            case .success(let response):
+                print("success - ", response.statusCode, response.data)
+            
+                do {
+                    let result = try JSONDecoder().decode(EmailResponse.self, from: response.data)
+                    print(result)
+                } catch {
+                    print("error")
+                }
+                
+            case .failure(let error):
+                print("error - ", error)
+            }
+        }
+        
+    }
+    
+    func signUpRequest(email: String, pw: String, nickname: String, completionHandler: @escaping (JoinResponse?) -> Void) {
+        provider.request(.join(model: JoinModel(email: email, password: pw, nick: nickname))) { result in
+            
+            switch result {
+            case .success(let response):
+                print("success - ", response.statusCode, response.data)
+        
+                do {
+                    let result = try JSONDecoder().decode(JoinResponse.self, from: response.data)
+                    print(result)
+                    completionHandler(result)
+                } catch {
+                    print("error")
+                    completionHandler(nil)
+                }
+                
+            case .failure(let error):
+                print("error - ", error)
+                completionHandler(nil)
+            }
+        
+        }
+    }
+    
 }

@@ -12,7 +12,7 @@ class LoginView: BaseView {
     
     let idField = {
         let view = UITextField()
-        view.placeholder = "enter your id"
+        view.placeholder = "enter your email"
         view.borderStyle = .roundedRect
         
         return view

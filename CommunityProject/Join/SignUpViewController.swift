@@ -64,8 +64,9 @@ class SignUpViewController: UIViewController {
         mainView.emailValidationButton
             .rx
             .tap
-            .subscribe(with: self, onNext: { owner, _ in
-                print("탭")
+            .withLatestFrom(viewModel.email)
+            .subscribe(with: self, onNext: { owner, email in
+                owner.viewModel.validateEmail(email: email)
                 owner.viewModel.emailConfirmed.onNext(true)
             })
             .disposed(by: disposeBag)
@@ -113,5 +114,29 @@ class SignUpViewController: UIViewController {
         viewModel.joinButtonColor
             .bind(to: mainView.joinButton.rx.backgroundColor)
             .disposed(by: disposeBag)
+        
+        let join = Observable.combineLatest(viewModel.email, viewModel.pw, viewModel.nickname) { email, pw, nick in
+            return [email, pw, nick]
+        }
+        
+        mainView.joinButton
+            .rx
+            .tap
+            .withLatestFrom(join)
+            .subscribe(with: self) { owner, value in
+                owner.viewModel.signUpRequest(email: value[0], pw: value[1], nickname: value[2]) { response in
+                    if response == nil {
+                        // alert
+                    } else {
+                        // alert
+                        owner.navigationController?.popViewController(animated: true)
+                    }
+                }
+            }
+            .disposed(by: disposeBag)
     }
+}
+
+#Preview {
+    SignUpViewController()
 }

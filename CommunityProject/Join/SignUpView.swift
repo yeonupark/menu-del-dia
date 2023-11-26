@@ -20,7 +20,7 @@ class SignUpView: BaseView {
     
     let emailValidationButton = {
         let view = UIButton()
-        view.setTitle("confirm", for: .normal)
+        view.setTitle("validate", for: .normal)
         view.layer.cornerRadius = 5
         view.titleLabel?.font = .boldSystemFont(ofSize: 16)
         
@@ -71,6 +71,13 @@ class SignUpView: BaseView {
         return view
     }()
     
+    let emailValidationLabel = {
+        let view = UILabel()
+        view.font = .systemFont(ofSize: 14)
+        
+        return view
+    }()
+    
     let joinButton = {
         let view = UIButton()
         view.setTitle("JOIN", for: .normal)
@@ -86,7 +93,7 @@ class SignUpView: BaseView {
     override func configure() {
         super.configure()
         
-        for item in [emailField, emailValidationButton, pwField, pwRepeatField, nickField, phoneNumberField, birthdayField, joinButton] {
+        for item in [emailField, emailValidationButton, pwField, pwRepeatField, nickField, phoneNumberField, birthdayField, emailValidationLabel, joinButton] {
             addSubview(item)
         }
     }
@@ -118,8 +125,14 @@ class SignUpView: BaseView {
             }
         }
         
-        joinButton.snp.makeConstraints { make in
+        emailValidationLabel.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(54)
             make.top.equalTo(birthdayField.snp.bottom).offset(10)
+            make.height.equalTo(20)
+        }
+        
+        joinButton.snp.makeConstraints { make in
+            make.top.equalTo(emailValidationLabel.snp.bottom).offset(10)
             make.centerX.equalToSuperview()
             make.height.equalTo(30)
             make.width.equalTo(50)

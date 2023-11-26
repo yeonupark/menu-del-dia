@@ -31,6 +31,11 @@
 		48DA23022B0F384600A6FD56 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 48DA23012B0F384600A6FD56 /* Moya */; };
 		48DA23042B0F389E00A6FD56 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA23032B0F389E00A6FD56 /* API.swift */; };
 		48DA230E2B10406C00A6FD56 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA230D2B10406C00A6FD56 /* LoginViewModel.swift */; };
+		48DA23112B1369FA00A6FD56 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA23102B1369FA00A6FD56 /* MyPageViewController.swift */; };
+		48DA23152B136A2600A6FD56 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA23142B136A2600A6FD56 /* MyPageView.swift */; };
+		48DA23172B136AC800A6FD56 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA23162B136AC800A6FD56 /* TabBarController.swift */; };
+		48DA231A2B1370A300A6FD56 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA23192B1370A300A6FD56 /* HomeViewController.swift */; };
+		48DA231C2B1370B800A6FD56 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA231B2B1370B800A6FD56 /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +79,11 @@
 		48DA22B22B0E533900A6FD56 /* APIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModel.swift; sourceTree = "<group>"; };
 		48DA23032B0F389E00A6FD56 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		48DA230D2B10406C00A6FD56 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		48DA23102B1369FA00A6FD56 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		48DA23142B136A2600A6FD56 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
+		48DA23162B136AC800A6FD56 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		48DA23192B1370A300A6FD56 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		48DA231B2B1370B800A6FD56 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +139,8 @@
 		4849B30E2B035FB800CBE244 /* CommunityProject */ = {
 			isa = PBXGroup;
 			children = (
+				48DA23182B13709700A6FD56 /* Home */,
+				48DA230F2B1369B800A6FD56 /* MyPage */,
 				48DA22B42B0E533D00A6FD56 /* Network */,
 				4849B35C2B08595900CBE244 /* Join */,
 				4849B3562B08546E00CBE244 /* Base */,
@@ -175,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				4849B3572B08547800CBE244 /* BaseView.swift */,
+				48DA23162B136AC800A6FD56 /* TabBarController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -197,6 +210,24 @@
 				48DA23032B0F389E00A6FD56 /* API.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		48DA230F2B1369B800A6FD56 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				48DA23102B1369FA00A6FD56 /* MyPageViewController.swift */,
+				48DA23142B136A2600A6FD56 /* MyPageView.swift */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
+		48DA23182B13709700A6FD56 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				48DA23192B1370A300A6FD56 /* HomeViewController.swift */,
+				48DA231B2B1370B800A6FD56 /* HomeView.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -346,11 +377,16 @@
 				48DA23042B0F389E00A6FD56 /* API.swift in Sources */,
 				4849B3402B0360B600CBE244 /* LoginViewController.swift in Sources */,
 				48DA22B12B0E522F00A6FD56 /* APIkey.swift in Sources */,
+				48DA23172B136AC800A6FD56 /* TabBarController.swift in Sources */,
 				4849B3602B08645000CBE244 /* SignUpViewController.swift in Sources */,
+				48DA231C2B1370B800A6FD56 /* HomeView.swift in Sources */,
 				4849B3622B0A0A6800CBE244 /* SignUpViewModel.swift in Sources */,
 				48DA22B32B0E533900A6FD56 /* APIModel.swift in Sources */,
 				4849B3102B035FB800CBE244 /* AppDelegate.swift in Sources */,
+				48DA23152B136A2600A6FD56 /* MyPageView.swift in Sources */,
+				48DA23112B1369FA00A6FD56 /* MyPageViewController.swift in Sources */,
 				4849B3582B08547800CBE244 /* BaseView.swift in Sources */,
+				48DA231A2B1370A300A6FD56 /* HomeViewController.swift in Sources */,
 				48DA230E2B10406C00A6FD56 /* LoginViewModel.swift in Sources */,
 				4849B3432B0362A900CBE244 /* LoginView.swift in Sources */,
 				4849B35E2B085B3C00CBE244 /* SignUpView.swift in Sources */,

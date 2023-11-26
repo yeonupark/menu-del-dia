@@ -53,6 +53,9 @@ class SignUpViewController: UIViewController {
         viewModel.birthday
             .bind(to: mainView.birthdayField.rx.text)
             .disposed(by: disposeBag)
+        viewModel.emailValidationText
+            .bind(to: mainView.emailValidationLabel.rx.text)
+            .disposed(by: disposeBag)
         
         mainView.emailField
             .rx
@@ -66,8 +69,11 @@ class SignUpViewController: UIViewController {
             .tap
             .withLatestFrom(viewModel.email)
             .subscribe(with: self, onNext: { owner, email in
-                owner.viewModel.validateEmail(email: email)
-                owner.viewModel.emailConfirmed.onNext(true)
+                owner.viewModel.validateEmail(email: email, completionHandler: { result in
+                    owner.viewModel.emailConfirmed.onNext(result)
+                })
+                owner.viewModel.emailCheck()
+                
             })
             .disposed(by: disposeBag)
         
@@ -115,8 +121,15 @@ class SignUpViewController: UIViewController {
             .bind(to: mainView.joinButton.rx.backgroundColor)
             .disposed(by: disposeBag)
         
-        let join = Observable.combineLatest(viewModel.email, viewModel.pw, viewModel.nickname) { email, pw, nick in
-            return [email, pw, nick]
+        viewModel.emailValidationText
+            .bind(to: mainView.emailValidationLabel.rx.text)
+            .disposed(by: disposeBag)
+        viewModel.emailValidationColor
+            .bind(to: mainView.emailValidationLabel.rx.textColor)
+            .disposed(by: disposeBag)
+        
+        let join = Observable.combineLatest(viewModel.email, viewModel.pw, viewModel.nickname, viewModel.phoneNumber, viewModel.birthday) { email, pw, nick, pn, birthday in
+            return JoinModel(email: email, password: pw, nick: nick, phoneNum: pn, birthday: birthday)
         }
         
         mainView.joinButton
@@ -124,7 +137,7 @@ class SignUpViewController: UIViewController {
             .tap
             .withLatestFrom(join)
             .subscribe(with: self) { owner, value in
-                owner.viewModel.signUpRequest(email: value[0], pw: value[1], nickname: value[2]) { response in
+                owner.viewModel.signUpRequest(email: value.email, pw: value.password, nickname: value.nick, phoneNumber: value.phoneNum, birthDay: value.birthday) { response in
                     if response == nil {
                         // alert
                     } else {

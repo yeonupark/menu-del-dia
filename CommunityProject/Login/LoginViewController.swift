@@ -27,6 +27,18 @@ class LoginViewController: UIViewController {
         mainView.signUpButton.addTarget(self, action: #selector(joinButtonClicked), for: .touchUpInside)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        BehaviorSubject(value: "")
+            .bind(to: viewModel.email)
+            .disposed(by: disposeBag)
+        
+        BehaviorSubject(value: "")
+            .bind(to: viewModel.pw)
+            .disposed(by: disposeBag)
+    }
+    
     @objc func joinButtonClicked() {
         let vc = SignUpViewController()
         navigationController?.pushViewController(vc, animated: true)
@@ -77,6 +89,9 @@ class LoginViewController: UIViewController {
                     } else {
                         // alert
                         print("로그인 성공")
+                        let vc = TabBarController()
+                        vc.modalPresentationStyle = .fullScreen
+                        owner.present(vc, animated: true)
                     }
                 }
             }

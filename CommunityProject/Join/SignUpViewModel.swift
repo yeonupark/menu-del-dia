@@ -18,8 +18,9 @@ class SignUpViewModel {
     let phoneNumber = BehaviorSubject(value: "")
     let birthday = BehaviorSubject(value: "")
     
-    let emailConfirmed = BehaviorSubject(value: true)
-    //let pwConfirmed = BehaviorSubject(value: false)
+    let emailConfirmed = BehaviorSubject(value: false)
+    let emailValidationText = BehaviorSubject(value: "Please verify your email address")
+    let emailValidationColor = BehaviorSubject(value: UIColor.black)
     
     let joinButtonEnabled = BehaviorSubject(value: false)
     let joinButtonColor = BehaviorSubject(value: UIColor.lightGray)
@@ -27,7 +28,19 @@ class SignUpViewModel {
     let disposeBag = DisposeBag()
     
     init() {
+        //emailCheck()
         fieldCheck()
+    }
+    
+    func emailCheck() {
+        emailConfirmed
+            .subscribe(with: self) { owner, value in
+                let color = value ? UIColor.blue : UIColor.red
+                let text = value ? "Your email has been verified" : "The email address is unavailable"
+                owner.emailValidationColor.onNext(color)
+                owner.emailValidationText.onNext(text)
+            }
+            .disposed(by: disposeBag)
     }
     
     func fieldCheck() {
@@ -49,28 +62,43 @@ class SignUpViewModel {
     
     private let provider = MoyaProvider<SeSacAPI>()
     
-    func validateEmail(email: String) {
+    func validateEmail(email: String, completionHandler: @escaping (Bool) -> Void) {
         provider.request(.emailValidation(email: email)) { result in
             switch result {
             case .success(let response):
-                print("success - ", response.statusCode, response.data)
-            
-                do {
-                    let result = try JSONDecoder().decode(EmailResponse.self, from: response.data)
-                    print(result)
-                } catch {
-                    print("error")
+                if (200..<300).contains(response.statusCode) {
+                    print("success - ", response.statusCode, response.data)
+                    
+                    do {
+                        let result = try JSONDecoder().decode(EmailResponse.self, from: response.data)
+                        print(result)
+                    } catch {
+                        print("error")
+                    }
+                    completionHandler(true)
+                    
+                } else if (400..<501).contains(response.statusCode) {
+                    print("failure - ", response.statusCode, response.data)
+                    
+                    do {
+                        let result = try JSONDecoder().decode(EmailResponse.self, from: response.data)
+                        print(result)
+                    } catch {
+                        print("error")
+                    }
+                    completionHandler(false)
                 }
                 
             case .failure(let error):
                 print("error - ", error)
+                completionHandler(false)
             }
         }
         
     }
     
-    func signUpRequest(email: String, pw: String, nickname: String, completionHandler: @escaping (JoinResponse?) -> Void) {
-        provider.request(.join(model: JoinModel(email: email, password: pw, nick: nickname))) { result in
+    func signUpRequest(email: String, pw: String, nickname: String, phoneNumber: String?, birthDay: String?, completionHandler: @escaping (JoinResponse?) -> Void) {
+        provider.request(.join(model: JoinModel(email: email, password: pw, nick: nickname, phoneNum: phoneNumber, birthday: birthDay))) { result in
             
             switch result {
             case .success(let response):

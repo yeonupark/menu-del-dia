@@ -50,11 +50,53 @@ struct PostModel: Encodable {
     let title: String?
     let content: String?
     let file: Data?
-    let product_id: String?
+    let product_id: String
     let content1: String?
     let content2: String?
-    let content3: String?
-    let content4: String?
-    let content5: String?
+//    let content3: String?
+//    let content4: String?
+//    let content5: String?
     
+}
+
+struct PostResponse: Decodable {
+    let likes, image, hashTags, comments: [String?]
+    let _id, time: String
+    let creator: Creator
+    let title, content, product_id: String?
+    
+}
+
+struct Creator: Decodable {
+    let _id, nick: String
+    let profile: String?
+
+}
+
+struct GetPost {
+    let limit: String
+    let product_id: String
+    
+    func getParameters() -> [String : String] {
+        
+        return ["limit" : limit, "product_id" : product_id]
+    }
+}
+
+struct GetPostResponse: Decodable {
+    let data: [Datum]
+}
+
+struct Datum: Decodable {
+    let likes, image, hashTags: [String]
+    let comments: [Comment?]
+    let _id: String
+    let creator: Creator
+    let time: String
+    let title, product_id, content, content1, content2, content3, content4, content5: String?
+}
+
+struct Comment: Decodable {
+    let _id, content, time: String
+    let creator: Creator
 }

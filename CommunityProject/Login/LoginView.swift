@@ -20,6 +20,7 @@ class LoginView: BaseView {
     
     let pwField = {
         let view = UITextField()
+        view.isSecureTextEntry = true
         view.placeholder = "enter your password"
         view.borderStyle = .roundedRect
         

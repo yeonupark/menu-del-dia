@@ -34,8 +34,12 @@
 		48DA23112B1369FA00A6FD56 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA23102B1369FA00A6FD56 /* MyPageViewController.swift */; };
 		48DA23152B136A2600A6FD56 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA23142B136A2600A6FD56 /* MyPageView.swift */; };
 		48DA23172B136AC800A6FD56 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA23162B136AC800A6FD56 /* TabBarController.swift */; };
-		48DA231A2B1370A300A6FD56 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA23192B1370A300A6FD56 /* HomeViewController.swift */; };
-		48DA231C2B1370B800A6FD56 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA231B2B1370B800A6FD56 /* HomeView.swift */; };
+		48DA231A2B1370A300A6FD56 /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA23192B1370A300A6FD56 /* BoardViewController.swift */; };
+		48DA231C2B1370B800A6FD56 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA231B2B1370B800A6FD56 /* BoardView.swift */; };
+		48DA232F2B1496B400A6FD56 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA232E2B1496B400A6FD56 /* PostView.swift */; };
+		48DA23312B14992100A6FD56 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA23302B14992100A6FD56 /* PostViewController.swift */; };
+		48DA23332B14A16900A6FD56 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA23322B14A16900A6FD56 /* PostViewModel.swift */; };
+		48F8B2302B15BFAC0096A108 /* BoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F8B22F2B15BFAC0096A108 /* BoardViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,8 +86,12 @@
 		48DA23102B1369FA00A6FD56 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		48DA23142B136A2600A6FD56 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		48DA23162B136AC800A6FD56 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		48DA23192B1370A300A6FD56 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		48DA231B2B1370B800A6FD56 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		48DA23192B1370A300A6FD56 /* BoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
+		48DA231B2B1370B800A6FD56 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
+		48DA232E2B1496B400A6FD56 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
+		48DA23302B14992100A6FD56 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		48DA23322B14A16900A6FD56 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
+		48F8B22F2B15BFAC0096A108 /* BoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,7 +147,8 @@
 		4849B30E2B035FB800CBE244 /* CommunityProject */ = {
 			isa = PBXGroup;
 			children = (
-				48DA23182B13709700A6FD56 /* Home */,
+				48DA232D2B1496AA00A6FD56 /* Post */,
+				48DA23182B13709700A6FD56 /* Board */,
 				48DA230F2B1369B800A6FD56 /* MyPage */,
 				48DA22B42B0E533D00A6FD56 /* Network */,
 				4849B35C2B08595900CBE244 /* Join */,
@@ -221,13 +230,24 @@
 			path = MyPage;
 			sourceTree = "<group>";
 		};
-		48DA23182B13709700A6FD56 /* Home */ = {
+		48DA23182B13709700A6FD56 /* Board */ = {
 			isa = PBXGroup;
 			children = (
-				48DA23192B1370A300A6FD56 /* HomeViewController.swift */,
-				48DA231B2B1370B800A6FD56 /* HomeView.swift */,
+				48DA23192B1370A300A6FD56 /* BoardViewController.swift */,
+				48DA231B2B1370B800A6FD56 /* BoardView.swift */,
+				48F8B22F2B15BFAC0096A108 /* BoardViewModel.swift */,
 			);
-			path = Home;
+			path = Board;
+			sourceTree = "<group>";
+		};
+		48DA232D2B1496AA00A6FD56 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				48DA23302B14992100A6FD56 /* PostViewController.swift */,
+				48DA232E2B1496B400A6FD56 /* PostView.swift */,
+				48DA23322B14A16900A6FD56 /* PostViewModel.swift */,
+			);
+			path = Post;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -374,23 +394,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48DA23332B14A16900A6FD56 /* PostViewModel.swift in Sources */,
 				48DA23042B0F389E00A6FD56 /* API.swift in Sources */,
 				4849B3402B0360B600CBE244 /* LoginViewController.swift in Sources */,
 				48DA22B12B0E522F00A6FD56 /* APIkey.swift in Sources */,
 				48DA23172B136AC800A6FD56 /* TabBarController.swift in Sources */,
 				4849B3602B08645000CBE244 /* SignUpViewController.swift in Sources */,
-				48DA231C2B1370B800A6FD56 /* HomeView.swift in Sources */,
+				48DA231C2B1370B800A6FD56 /* BoardView.swift in Sources */,
 				4849B3622B0A0A6800CBE244 /* SignUpViewModel.swift in Sources */,
 				48DA22B32B0E533900A6FD56 /* APIModel.swift in Sources */,
 				4849B3102B035FB800CBE244 /* AppDelegate.swift in Sources */,
 				48DA23152B136A2600A6FD56 /* MyPageView.swift in Sources */,
 				48DA23112B1369FA00A6FD56 /* MyPageViewController.swift in Sources */,
 				4849B3582B08547800CBE244 /* BaseView.swift in Sources */,
-				48DA231A2B1370A300A6FD56 /* HomeViewController.swift in Sources */,
+				48DA23312B14992100A6FD56 /* PostViewController.swift in Sources */,
+				48DA231A2B1370A300A6FD56 /* BoardViewController.swift in Sources */,
 				48DA230E2B10406C00A6FD56 /* LoginViewModel.swift in Sources */,
 				4849B3432B0362A900CBE244 /* LoginView.swift in Sources */,
 				4849B35E2B085B3C00CBE244 /* SignUpView.swift in Sources */,
+				48DA232F2B1496B400A6FD56 /* PostView.swift in Sources */,
 				4849B3122B035FB800CBE244 /* SceneDelegate.swift in Sources */,
+				48F8B2302B15BFAC0096A108 /* BoardViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

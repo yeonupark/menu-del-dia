@@ -17,14 +17,14 @@ class TabBarController: UITabBarController {
     
     func setTabBar() {
         
-        let homeTab = HomeViewController()
-        homeTab.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "house"), tag: 0)
+        let boardTab = UINavigationController(rootViewController: BoardViewController())
+        boardTab.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "house"), tag: 0)
         
-        let myPageTab = MyPageViewController()
+        let myPageTab = UINavigationController(rootViewController: MyPageViewController())
         myPageTab.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "person"), tag: 1)
         
-        viewControllers = [homeTab, myPageTab]
+        viewControllers = [boardTab, myPageTab]
         
-        navigationController?.navigationItem.backBarButtonItem?.isHidden = true
+        //navigationController?.navigationItem.backBarButtonItem?.isHidden = true
     }
 }

@@ -11,6 +11,8 @@ import Moya
 
 class BoardViewModel {
     
+    let board = PublishSubject<GetPostResponse>()
+    
     private let provider = MoyaProvider<SeSacAPI>()
     
     func fetchPost(limit: String, product_id: String, completionHandler: @escaping (GetPostResponse?) -> Void) {

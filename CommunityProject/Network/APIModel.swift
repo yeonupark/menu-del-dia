@@ -45,6 +45,18 @@ struct EmailResponse: Decodable {
     let message: String
 }
 
+struct RefreshResponse: Decodable {
+    
+    let token: String
+}
+
+struct WithDrawResponse: Decodable {
+    
+    let _id: String
+    let email: String
+    let nick: String
+}
+
 struct PostModel: Encodable {
     
     let title: String?

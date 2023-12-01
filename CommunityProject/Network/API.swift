@@ -12,6 +12,8 @@ enum SeSacAPI {
     case join(model: JoinModel)
     case login(email: String, pw: String)
     case emailValidation(email: String)
+    case refresh
+    case withdraw
     case post(model: PostModel)
     case getPost(parameter: GetPost)
 }
@@ -19,7 +21,14 @@ enum SeSacAPI {
 extension SeSacAPI: TargetType {
     
     var baseURL: URL {
-        URL(string: APIkey.baseURL)!
+        
+        switch self {
+        case .join, .login, .emailValidation, .refresh, .withdraw:
+            URL(string: APIkey.testURL)!
+        case .post, .getPost:
+            URL(string: APIkey.baseURL)!
+        }
+    
     }
     
     var path: String {
@@ -30,9 +39,12 @@ extension SeSacAPI: TargetType {
             "login"
         case .emailValidation:
             "validation/email"
+        case .refresh:
+            "refresh"
+        case .withdraw:
+            "withdraw"
         case .post, .getPost:
             "post"
-            
         }
     }
     
@@ -40,7 +52,7 @@ extension SeSacAPI: TargetType {
         switch self {
         case .join, .login, .emailValidation, .post:
             return .post
-        case .getPost:
+        case .getPost, .refresh, .withdraw:
             return .get
         }
     }
@@ -53,6 +65,10 @@ extension SeSacAPI: TargetType {
             return .requestJSONEncodable(LoginModel(email: email, password: password))
         case .emailValidation(let email):
             return .requestJSONEncodable(EmailValidation(email: email))
+        case .refresh:
+            return .requestPlain
+        case .withdraw:
+            return .requestPlain
         case .post(let post):
             var formData: [MultipartFormData] = []
             
@@ -92,11 +108,17 @@ extension SeSacAPI: TargetType {
             ["Content-Type" : "multipart/form-data",
              "Authorization" : UserDefaults.standard.string(forKey: "token") ?? "",
              "SesacKey" : APIkey.sesacKey]
+            
+        case .refresh:
+            ["Authorization" : UserDefaults.standard.string(forKey: "token") ?? "",
+             "SesacKey" : APIkey.sesacKey,
+             "Refresh" : UserDefaults.standard.string(forKey: "refreshToken") ?? ""]
         
-        case .getPost:
+        case .withdraw, .getPost:
              ["Authorization" : UserDefaults.standard.string(forKey: "token") ?? "",
              "SesacKey" : APIkey.sesacKey]
         }
+        
     }
     
 }

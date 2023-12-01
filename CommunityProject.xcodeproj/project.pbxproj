@@ -40,6 +40,9 @@
 		48DA23312B14992100A6FD56 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA23302B14992100A6FD56 /* PostViewController.swift */; };
 		48DA23332B14A16900A6FD56 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA23322B14A16900A6FD56 /* PostViewModel.swift */; };
 		48F8B2302B15BFAC0096A108 /* BoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F8B22F2B15BFAC0096A108 /* BoardViewModel.swift */; };
+		48F8B24D2B174A140096A108 /* BoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F8B24C2B174A140096A108 /* BoardTableViewCell.swift */; };
+		48F8B27B2B1863090096A108 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F8B27A2B1863090096A108 /* MyPageViewModel.swift */; };
+		48F8B27D2B186B440096A108 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F8B27C2B186B440096A108 /* BaseViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +95,9 @@
 		48DA23302B14992100A6FD56 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		48DA23322B14A16900A6FD56 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		48F8B22F2B15BFAC0096A108 /* BoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewModel.swift; sourceTree = "<group>"; };
+		48F8B24C2B174A140096A108 /* BoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTableViewCell.swift; sourceTree = "<group>"; };
+		48F8B27A2B1863090096A108 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
+		48F8B27C2B186B440096A108 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +203,7 @@
 			children = (
 				4849B3572B08547800CBE244 /* BaseView.swift */,
 				48DA23162B136AC800A6FD56 /* TabBarController.swift */,
+				48F8B27C2B186B440096A108 /* BaseViewModel.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -226,6 +233,7 @@
 			children = (
 				48DA23102B1369FA00A6FD56 /* MyPageViewController.swift */,
 				48DA23142B136A2600A6FD56 /* MyPageView.swift */,
+				48F8B27A2B1863090096A108 /* MyPageViewModel.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -236,6 +244,7 @@
 				48DA23192B1370A300A6FD56 /* BoardViewController.swift */,
 				48DA231B2B1370B800A6FD56 /* BoardView.swift */,
 				48F8B22F2B15BFAC0096A108 /* BoardViewModel.swift */,
+				48F8B24C2B174A140096A108 /* BoardTableViewCell.swift */,
 			);
 			path = Board;
 			sourceTree = "<group>";
@@ -394,13 +403,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48F8B24D2B174A140096A108 /* BoardTableViewCell.swift in Sources */,
 				48DA23332B14A16900A6FD56 /* PostViewModel.swift in Sources */,
 				48DA23042B0F389E00A6FD56 /* API.swift in Sources */,
 				4849B3402B0360B600CBE244 /* LoginViewController.swift in Sources */,
 				48DA22B12B0E522F00A6FD56 /* APIkey.swift in Sources */,
+				48F8B27D2B186B440096A108 /* BaseViewModel.swift in Sources */,
 				48DA23172B136AC800A6FD56 /* TabBarController.swift in Sources */,
 				4849B3602B08645000CBE244 /* SignUpViewController.swift in Sources */,
 				48DA231C2B1370B800A6FD56 /* BoardView.swift in Sources */,
+				48F8B27B2B1863090096A108 /* MyPageViewModel.swift in Sources */,
 				4849B3622B0A0A6800CBE244 /* SignUpViewModel.swift in Sources */,
 				48DA22B32B0E533900A6FD56 /* APIModel.swift in Sources */,
 				4849B3102B035FB800CBE244 /* AppDelegate.swift in Sources */,

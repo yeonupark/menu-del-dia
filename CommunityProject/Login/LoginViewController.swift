@@ -89,9 +89,9 @@ class LoginViewController: UIViewController {
                     } else {
                         // alert
                         print("로그인 성공")
-                        let vc = TabBarController()
+                        let vc = BoardViewController()
                         vc.modalPresentationStyle = .fullScreen
-                        owner.present(vc, animated: true)
+                        owner.navigationController?.pushViewController(vc, animated: true)
                     }
                 }
             }

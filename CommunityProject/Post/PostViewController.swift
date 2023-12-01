@@ -65,6 +65,7 @@ class PostViewController: UIViewController {
             .rx
             .tap
             .withLatestFrom(post)
+            .observe(on: MainScheduler.instance)
             .subscribe(with: self) { owner, value in
                 owner.viewModel.postRequest(postModel: value) { response in
                     if response == nil {

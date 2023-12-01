@@ -88,9 +88,7 @@ class SignUpViewController: UIViewController {
             .rx
             .text
             .orEmpty
-            .subscribe(with: self) { owner, value in
-                owner.viewModel.pwRepeat.onNext(value)
-            }
+            .bind(to: viewModel.pwRepeat)
             .disposed(by: disposeBag)
         
         mainView.nickField
@@ -136,6 +134,7 @@ class SignUpViewController: UIViewController {
             .rx
             .tap
             .withLatestFrom(join)
+            .observe(on: MainScheduler.instance)
             .subscribe(with: self) { owner, value in
                 owner.viewModel.signUpRequest(email: value.email, pw: value.password, nickname: value.nick, phoneNumber: value.phoneNum, birthDay: value.birthday) { response in
                     if response == nil {

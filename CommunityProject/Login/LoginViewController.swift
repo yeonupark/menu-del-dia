@@ -22,6 +22,9 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        let navigationController = navigationController
+//        print("vc in navigation stack: \(String(describing: navigationController?.viewControllers))")
+        
         bind()
         
         mainView.signUpButton.addTarget(self, action: #selector(joinButtonClicked), for: .touchUpInside)
@@ -81,6 +84,7 @@ class LoginViewController: UIViewController {
             .rx
             .tap
             .withLatestFrom(loginInfo)
+            .observe(on: MainScheduler.instance)
             .subscribe(with: self) { owner, value in
                 owner.viewModel.loginRequest(email: value.email, pw: value.password) { response in
                     if response == nil {
@@ -90,8 +94,7 @@ class LoginViewController: UIViewController {
                         // alert
                         print("로그인 성공")
                         let vc = BoardViewController()
-                        vc.modalPresentationStyle = .fullScreen
-                        owner.navigationController?.pushViewController(vc, animated: true)
+                        owner.navigationController?.setViewControllers([vc], animated: true)
                     }
                 }
             }

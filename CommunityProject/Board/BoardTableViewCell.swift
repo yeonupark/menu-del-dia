@@ -20,7 +20,7 @@ class BoardTableViewCell: UITableViewCell {
     
     let userLabel = {
         let view = UILabel()
-        view.text = "xxxxitodksn"
+        view.text = "아이디"
         view.font = .boldSystemFont(ofSize: 16)
         
         return view
@@ -28,7 +28,7 @@ class BoardTableViewCell: UITableViewCell {
     
     let dateLabel = {
         let view = UILabel()
-        view.text = "2023.10.12"
+        view.text = "날짜"
         view.font = .systemFont(ofSize: 15)
         
         return view

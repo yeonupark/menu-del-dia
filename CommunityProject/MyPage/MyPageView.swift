@@ -10,23 +10,24 @@ import SnapKit
 
 class MyPageView: BaseView {
     
-    let fakeButton = {
-        let view = UIButton()
+    let tableView = {
+        let view = UITableView()
+        view.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        //view.backgroundColor = .white
+        view.rowHeight = 50
         
-        view.setTitle("탈퇴", for: .normal)
-        view.backgroundColor = .green
         return view
     }()
     
     override func configure() {
         super.configure()
-        addSubview(fakeButton)
+        addSubview(tableView)
     }
     
     override func setConstraints() {
-        fakeButton.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.size.equalTo(20)
+        
+        tableView.snp.makeConstraints { make in
+            make.edges.equalTo(self.safeAreaInsets)
         }
     }
 }

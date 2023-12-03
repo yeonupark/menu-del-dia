@@ -7,15 +7,16 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 import Moya
 
 class BoardViewModel {
     
-    let board = PublishSubject<GetPostResponse>()
+    let board = BehaviorRelay(value: GetPostResponse(data: []))
     
     private let provider = MoyaProvider<SeSacAPI>()
     
-    func fetchPost(limit: String, product_id: String, completionHandler: @escaping (GetPostResponse?) -> Void) {
+    func fetchPost(limit: String, product_id: String) {
         provider.request(.getPost(parameter: GetPost(limit: limit, product_id: product_id))) { result in
             switch result {
             case .success(let response):
@@ -24,21 +25,18 @@ class BoardViewModel {
                     
                     do {
                         let result = try JSONDecoder().decode(GetPostResponse.self, from: response.data)
-                        //print(result)
-                        completionHandler(result)
+                        
+                        self.board.accept(result)
                     } catch {
-                        //print("error")
-                        completionHandler(nil)
+                        print("error")
                     }
                     
                 } else if (400..<501).contains(response.statusCode) {
                     print("failure - ", response.statusCode, response.data)
-                    completionHandler(nil)
                 }
                 
             case .failure(let error):
                 print("error - ", error)
-                completionHandler(nil)
             }
         }
     }

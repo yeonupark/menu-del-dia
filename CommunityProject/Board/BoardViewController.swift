@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class BoardViewController: UIViewController {
     
@@ -16,6 +17,7 @@ class BoardViewController: UIViewController {
     }
     
     let viewModel = BoardViewModel()
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,18 +26,22 @@ class BoardViewController: UIViewController {
         
         mainView.postButton.addTarget(self, action: #selector(postButtonClicked), for: .touchUpInside)
         
-        mainView.tableView.delegate = self
-        mainView.tableView.dataSource = self
-        
-        
+        viewModel.fetchPost(limit: "5", product_id: "tmm")
+        bind()
     }
     
-    func fetch() {
-//        viewModel.board
-//            .bind(to: <#T##GetPostResponse...##GetPostResponse#>)
-        viewModel.fetchPost(limit: "5", product_id: "tmt") { response in
-        }
+    func bind() {
+        viewModel.board
+            .map { $0.data }
+            .bind(to: mainView.tableView.rx.items(cellIdentifier: "BoardTableViewCell", cellType: BoardTableViewCell.self)) { (row, element, cell) in
+                cell.userLabel.text = element.creator.nick
+                cell.dateLabel.text = element.time
+                
+            }
+            .disposed(by: disposeBag)
+            
     }
+    
     func setNavigationBar() {
         navigationItem.hidesBackButton = true
         let myPageButton = UIBarButtonItem(title: "MY", style: .plain, target: self, action: #selector(myPageButtonClicked))

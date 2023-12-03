@@ -6,9 +6,12 @@
 //
 
 import Foundation
+import RxSwift
 import Moya
 
 class MyPageViewModel: BaseViewModel {
+    
+    let items = Observable.just(["My Profile", "Logout", "Withdraw"])
     
     private let provider = MoyaProvider<SeSacAPI>()
     

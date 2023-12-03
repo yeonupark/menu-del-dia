@@ -89,7 +89,6 @@ extension SeSacAPI: TargetType {
             if let content2 = post.content2 {
                 formData.append(MultipartFormData(provider: .data(content2.data(using: .utf8)!), name: "content2"))
             }
-            print("데이터: ", formData)
             return .uploadMultipart(formData)
         case .getPost(let parameters):
             let parameters = parameters.getParameters()

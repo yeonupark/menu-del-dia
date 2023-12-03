@@ -51,7 +51,6 @@ class LoginViewModel {
         
                 do {
                     let result = try JSONDecoder().decode(LoginResponse.self, from: response.data)
-                    print(result)
                     UserDefaults.standard.set(result.token, forKey: "token")
                     UserDefaults.standard.set(result.refreshToken, forKey: "refreshToken")
                     completionHandler(result)

@@ -42,6 +42,27 @@ class BoardTableViewCell: UITableViewCell {
         return view
     }()
     
+    let titleLabel = {
+        let view = UILabel()
+        view.font = .boldSystemFont(ofSize: 16)
+        
+        return view
+    }()
+    
+    let contentLabel = {
+        let view = UILabel()
+        view.font = .systemFont(ofSize: 15)
+        
+        return view
+    }()
+    
+    let hashtagLabel = {
+        let view = UILabel()
+        view.font = .systemFont(ofSize: 15)
+        
+        return view
+    }()
+    
     let likeButton = {
         let view = UIButton()
         view.setImage(UIImage(systemName: "heart"), for: .normal)
@@ -88,7 +109,7 @@ class BoardTableViewCell: UITableViewCell {
         
         self.isUserInteractionEnabled = false
         
-        for item in [profileImage, userLabel, dateLabel, foodImage, likeButton, likeButtonImage, commentButton, commentButtonImage] {
+        for item in [profileImage, userLabel, dateLabel, foodImage, titleLabel, contentLabel, hashtagLabel, likeButton, likeButtonImage, commentButton, commentButtonImage] {
             contentView.addSubview(item)
         }
     }
@@ -96,7 +117,8 @@ class BoardTableViewCell: UITableViewCell {
     func setConstraints() {
         
         profileImage.snp.makeConstraints { make in
-            make.leading.top.equalToSuperview().inset(5)
+            make.leading.equalToSuperview().inset(20)
+            make.top.equalToSuperview().inset(5)
             make.size.equalTo(50)
         }
         userLabel.snp.makeConstraints { make in
@@ -110,19 +132,35 @@ class BoardTableViewCell: UITableViewCell {
             make.height.equalTo(18)
         }
         foodImage.snp.makeConstraints { make in
-            make.size.equalTo(UIScreen.main.bounds.width)
-            make.top.equalTo(dateLabel.snp.bottom).offset(5)
+            make.size.equalTo(UIScreen.main.bounds.width - 40)
+            make.horizontalEdges.equalToSuperview().inset(20)
+            make.top.equalTo(dateLabel.snp.bottom).offset(10)
+        }
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(foodImage.snp.bottom).offset(7)
+            make.leading.equalToSuperview().inset(20)
+            make.height.equalTo(20)
+        }
+        contentLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(7)
+            make.leading.equalToSuperview().inset(20)
+            make.height.equalTo(20)
+        }
+        hashtagLabel.snp.makeConstraints { make in
+            make.top.equalTo(contentLabel.snp.bottom).offset(7)
+            make.leading.equalToSuperview().inset(20)
+            make.height.equalTo(20)
         }
         likeButton.snp.makeConstraints { make in
-            make.top.equalTo(foodImage.snp.bottom).offset(7)
-            make.leading.equalToSuperview().inset(10)
+            make.top.equalTo(hashtagLabel.snp.bottom).offset(7)
+            make.leading.equalToSuperview().inset(20)
             make.size.equalTo(28)
         }
         likeButtonImage.snp.makeConstraints { make in
             make.edges.equalTo(likeButton)
         }
         commentButton.snp.makeConstraints { make in
-            make.top.equalTo(foodImage.snp.bottom).offset(7)
+            make.top.equalTo(hashtagLabel.snp.bottom).offset(7)
             make.leading.equalTo(likeButton.snp.trailing).offset(10)
             make.size.equalTo(28)
         }

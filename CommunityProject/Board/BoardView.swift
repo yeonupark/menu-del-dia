@@ -13,7 +13,7 @@ class BoardView: BaseView {
         let view = UITableView()
         view.register(BoardTableViewCell.self, forCellReuseIdentifier: "BoardTableViewCell")
         view.backgroundColor = .clear
-        view.rowHeight = 100 + UIScreen.main.bounds.width
+        view.rowHeight = 146 + UIScreen.main.bounds.width
         
         return view
     }()

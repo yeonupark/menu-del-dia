@@ -26,5 +26,7 @@
 			</array>
 		</dict>
 	</dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>사진을 불러오기 위해서는 갤러리에 접근을 허용해야 해요.</string>
 </dict>
 </plist>

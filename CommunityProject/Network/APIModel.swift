@@ -61,7 +61,7 @@ struct PostModel: Encodable {
     
     let title: String?
     let content: String?
-    let file: Data?
+    let file: [Data]?
     let product_id: String
     let content1: String?
     let content2: String?

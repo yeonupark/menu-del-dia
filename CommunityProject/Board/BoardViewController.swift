@@ -26,7 +26,7 @@ class BoardViewController: UIViewController {
         
         mainView.postButton.addTarget(self, action: #selector(postButtonClicked), for: .touchUpInside)
         
-        viewModel.fetchPost(limit: "5", product_id: "tmm")
+        viewModel.fetchPost(limit: "5", product_id: "")
         bind()
     }
     
@@ -36,7 +36,9 @@ class BoardViewController: UIViewController {
             .bind(to: mainView.tableView.rx.items(cellIdentifier: "BoardTableViewCell", cellType: BoardTableViewCell.self)) { (row, element, cell) in
                 cell.userLabel.text = element.creator.nick
                 cell.dateLabel.text = element.time
-                
+                cell.titleLabel.text = element.title
+                cell.contentLabel.text = element.content
+                cell.hashtagLabel.text = element.content1
             }
             .disposed(by: disposeBag)
             

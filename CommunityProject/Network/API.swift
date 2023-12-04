@@ -79,9 +79,10 @@ extension SeSacAPI: TargetType {
                 formData.append(MultipartFormData(provider: .data(content.data(using: .utf8)!), name: "content"))
             }
             formData.append(MultipartFormData(provider: .data(post.product_id.data(using: .utf8)!), name: "product_id"))
-            
-            if let file = post.file {
-                formData.append(MultipartFormData(provider: .data(file), name: "file"))
+            if let files = post.file {
+                for file in files {
+                    formData.append(MultipartFormData(provider: .data(file), name: "file"))
+                }
             }
             if let content1 = post.content1 {
                 formData.append(MultipartFormData(provider: .data(content1.data(using: .utf8)!), name: "content1"))

@@ -9,15 +9,17 @@ import Foundation
 import RxSwift
 import Moya
 
-class PostViewModel {
+class PostViewModel: BaseViewModel {
     
     let title = PublishSubject<String>()
     let content = PublishSubject<String>()
     let hashTag = PublishSubject<String>()
     
+    let images = PublishSubject<[Data]>()
+    
     private let provider = MoyaProvider<SeSacAPI>()
     
-    func postRequest(postModel: PostModel, completionHandler: @escaping (PostResponse?) -> Void ) {
+    func postRequest(postModel: PostModel, completionHandler: @escaping (Int, PostResponse?) -> Void ) {
         
         provider.request(.post(model: postModel)) { result in
             
@@ -29,20 +31,21 @@ class PostViewModel {
                     do {
                         let result = try JSONDecoder().decode(PostResponse.self, from: response.data)
                         //print(result)
-                        completionHandler(result)
+                        print(result)
+                        completionHandler(response.statusCode, result)
                     } catch {
                         //print("error")
-                        completionHandler(nil)
+                        completionHandler(response.statusCode, nil)
                     }
                     
                 } else if (400..<501).contains(response.statusCode) {
                     print("failure - ", response.statusCode, response.data)
-                    completionHandler(nil)
+                    completionHandler(response.statusCode, nil)
                 }
                 
             case .failure(let error):
                 print("error - ", error)
-                completionHandler(nil)
+                completionHandler(999, nil)
             }
         }
         

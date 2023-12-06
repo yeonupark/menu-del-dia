@@ -150,4 +150,32 @@ class PostViewController: UIViewController {
     
 }
 
-
+extension PostViewController: PHPickerViewControllerDelegate {
+    
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        
+        picker.dismiss(animated: true)
+        
+        //var value: [Data] = []
+        for result in results {
+            if result.itemProvider.canLoadObject(ofClass: UIImage.self) {
+                
+                result.itemProvider.loadObject(ofClass: UIImage.self) { image, error in
+                    if let image = image as? UIImage {
+                        guard let data = image.jpegData(compressionQuality: 0.5) else { return }
+                        //value.append(data)
+                        
+                    }
+                }
+            }
+        }
+//        Observable.just(value)
+//            .observe(on: MainScheduler.instance)
+//            //.bind(to: viewModel.images)
+//            .subscribe(with: self, onNext: { owner, value in
+//                print(value)
+//                owner.viewModel.images.onNext(value)
+//            })
+//            .disposed(by: disposeBag)
+    }
+}

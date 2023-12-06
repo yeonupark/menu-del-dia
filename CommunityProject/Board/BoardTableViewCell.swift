@@ -38,7 +38,7 @@ class BoardTableViewCell: UITableViewCell {
         let view = UIImageView()
         view.image = UIImage(named: "br2")
         //view.contentMode = .scaleAspectFit
-        
+
         return view
     }()
     

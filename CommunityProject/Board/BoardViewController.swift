@@ -42,13 +42,31 @@ class BoardViewController: UIViewController {
                 cell.hashtagLabel.text = element.content1
                 
                 if element.image.isEmpty {
-                    cell.foodImage.image = UIImage(named: "br")
+                    DispatchQueue.main.async {
+                        cell.foodImage.image = UIImage(named: "br")
+                    }
                 } else {
-                    let url = URL(string: element.image[0])
-                    //print(url)
-                    cell.foodImage.kf.setImage(with: url)
+                    guard let url = URL(string: "\(APIkey.baseURL)\(element.image[0])") else { return }
+                    
+                    let modifier = AnyModifier { request in
+                        var r = request
+                        r.setValue(APIkey.sesacKey, forHTTPHeaderField: "SesacKey")
+                        r.setValue(UserDefaults.standard.string(forKey: "token") ?? "", forHTTPHeaderField: "Authorization")
+                        
+                        return r
+                    }
+                    
+                    DispatchQueue.main.async {
+                        cell.foodImage.kf.setImage(with: url, options: [.requestModifier(modifier)]) { result in
+                            switch result {
+                            case .success(_):
+                                return
+                            case .failure(let error):
+                                print("이미지 로딩 실패: \(error.localizedDescription)")
+                            }
+                        }
+                    }
                 }
-                
             }
             .disposed(by: disposeBag)
             

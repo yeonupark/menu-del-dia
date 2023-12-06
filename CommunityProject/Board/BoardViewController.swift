@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import Kingfisher
 
 class BoardViewController: UIViewController {
     
@@ -26,7 +27,7 @@ class BoardViewController: UIViewController {
         
         mainView.postButton.addTarget(self, action: #selector(postButtonClicked), for: .touchUpInside)
         
-        viewModel.fetchPost(limit: "5", product_id: "")
+        viewModel.fetchPost(limit: "10", product_id: "")
         bind()
     }
     
@@ -39,6 +40,15 @@ class BoardViewController: UIViewController {
                 cell.titleLabel.text = element.title
                 cell.contentLabel.text = element.content
                 cell.hashtagLabel.text = element.content1
+                
+                if element.image.isEmpty {
+                    cell.foodImage.image = UIImage(named: "br")
+                } else {
+                    let url = URL(string: element.image[0])
+                    //print(url)
+                    cell.foodImage.kf.setImage(with: url)
+                }
+                
             }
             .disposed(by: disposeBag)
             

@@ -44,6 +44,7 @@
 		48F8B27B2B1863090096A108 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F8B27A2B1863090096A108 /* MyPageViewModel.swift */; };
 		48F8B27D2B186B440096A108 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F8B27C2B186B440096A108 /* BaseViewModel.swift */; };
 		48F8B2BC2B1E2A1C0096A108 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 48F8B2BB2B1E2A1C0096A108 /* Kingfisher */; };
+		48F99E072B21777100E06083 /* PostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F99E062B21777100E06083 /* PostCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +100,7 @@
 		48F8B24C2B174A140096A108 /* BoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTableViewCell.swift; sourceTree = "<group>"; };
 		48F8B27A2B1863090096A108 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		48F8B27C2B186B440096A108 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		48F99E062B21777100E06083 /* PostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,6 +259,7 @@
 				48DA23302B14992100A6FD56 /* PostViewController.swift */,
 				48DA232E2B1496B400A6FD56 /* PostView.swift */,
 				48DA23322B14A16900A6FD56 /* PostViewModel.swift */,
+				48F99E062B21777100E06083 /* PostCollectionViewCell.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 				48DA231A2B1370A300A6FD56 /* BoardViewController.swift in Sources */,
 				48DA230E2B10406C00A6FD56 /* LoginViewModel.swift in Sources */,
 				4849B3432B0362A900CBE244 /* LoginView.swift in Sources */,
+				48F99E072B21777100E06083 /* PostCollectionViewCell.swift in Sources */,
 				4849B35E2B085B3C00CBE244 /* SignUpView.swift in Sources */,
 				48DA232F2B1496B400A6FD56 /* PostView.swift in Sources */,
 				4849B3122B035FB800CBE244 /* SceneDelegate.swift in Sources */,

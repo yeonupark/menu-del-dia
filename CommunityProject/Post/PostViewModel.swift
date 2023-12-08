@@ -15,7 +15,7 @@ class PostViewModel: BaseViewModel {
     let content = PublishSubject<String>()
     let hashTag = PublishSubject<String>()
     
-    let images = PublishSubject<[Data]>()
+    let imageData = PublishSubject<[Data]>()
     
     private let provider = MoyaProvider<SeSacAPI>()
     

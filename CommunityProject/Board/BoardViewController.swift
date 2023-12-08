@@ -27,8 +27,13 @@ class BoardViewController: UIViewController {
         
         mainView.postButton.addTarget(self, action: #selector(postButtonClicked), for: .touchUpInside)
         
-        viewModel.fetchPost(limit: "10", product_id: "")
         bind()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        viewModel.fetchPost(limit: "10", product_id: "")
     }
     
     func bind() {

@@ -21,11 +21,12 @@ class PostViewController: UIViewController {
     
     let viewModel = PostViewModel()
     let disposeBag = DisposeBag()
-    
+    let imageList = PublishSubject<[UIImage]>()
     override func viewDidLoad() {
         super.viewDidLoad()
         checkAuthorization()
         
+        bindCollectionView()
         bind()
     }
     
@@ -78,6 +79,15 @@ class PostViewController: UIViewController {
         present(picker, animated: true)
     }
     
+    func bindCollectionView() {
+        imageList
+            .bind(to: mainView.collectionView.rx.items(cellIdentifier: "PostCollectionViewCell", cellType: PostCollectionViewCell.self)) { (row, element, cell) in
+                
+                cell.imageView.image = element
+            }
+            .disposed(by: disposeBag)
+    }
+    
     func bind() {
         viewModel.title
             .bind(to: mainView.titleField.rx.text)
@@ -110,8 +120,11 @@ class PostViewController: UIViewController {
             .bind(to: viewModel.hashTag)
             .disposed(by: disposeBag)
         
-        let post = Observable.combineLatest(viewModel.title, viewModel.content, viewModel.hashTag, viewModel.images) { title, content, hashtag, images in
-            return PostModel(title: title, content: content, file: images, product_id: "tmm", content1: hashtag, content2: nil)
+        guard let blankImage = UIImage(named: "BlankImage") else { return }
+        guard let fakeData = blankImage.jpegData(compressionQuality: 0.5) else { return }
+        print("fakeData: ", fakeData)
+        let post = Observable.combineLatest(viewModel.title, viewModel.content, viewModel.hashTag, viewModel.imageData) { title, content, hashtag, images in
+            return PostModel(title: title, content: content, file: [fakeData], product_id: "tmm", content1: hashtag, content2: nil)
         }
         
         mainView.postButton
@@ -121,7 +134,7 @@ class PostViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(with: self) { owner, data in
                 owner.viewModel.postRequest(postModel: data) { code, response in
-                    print("뷰모델 images: ", owner.viewModel.images)
+                    print("뷰모델 imagedata: ", owner.viewModel.imageData.values)
                     
                     if code == 200 {
                         owner.navigationController?.popViewController(animated: true)
@@ -156,26 +169,45 @@ extension PostViewController: PHPickerViewControllerDelegate {
         
         picker.dismiss(animated: true)
         
-        //var value: [Data] = []
+        var dataValue: [Data] = []
+        var imageValue: [UIImage] = []
+        let dispatchGroup = DispatchGroup()
+        
         for result in results {
             if result.itemProvider.canLoadObject(ofClass: UIImage.self) {
                 
+                dispatchGroup.enter()
+                
                 result.itemProvider.loadObject(ofClass: UIImage.self) { image, error in
+                    
+                    
+                    defer {
+                        dispatchGroup.leave()
+                    }
+                    
                     if let image = image as? UIImage {
+                        imageValue.append(image)
+                        
                         guard let data = image.jpegData(compressionQuality: 0.5) else { return }
-                        //value.append(data)
+                        dataValue.append(data)
                         
                     }
                 }
             }
         }
-//        Observable.just(value)
-//            .observe(on: MainScheduler.instance)
-//            //.bind(to: viewModel.images)
-//            .subscribe(with: self, onNext: { owner, value in
-//                print(value)
-//                owner.viewModel.images.onNext(value)
-//            })
-//            .disposed(by: disposeBag)
+        dispatchGroup.notify(queue: .main) {
+            let combinedObservable = Observable.zip(Observable.just(dataValue), Observable.just(imageValue))
+            
+            combinedObservable
+                .observe(on: MainScheduler.instance)
+                .subscribe(with: self) { owner, value in
+                    owner.viewModel.imageData.onNext(value.0)
+                    owner.imageList.onNext(value.1)
+                }
+                .disposed(by: self.disposeBag)
+            
+            print(self.viewModel.imageData)
+            print(self.viewModel.imageData.values)
+        }
     }
 }

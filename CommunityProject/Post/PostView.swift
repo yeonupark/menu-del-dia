@@ -20,6 +20,24 @@ class PostView: BaseView {
         return view
     }()
     
+    lazy var collectionView = {
+        
+        let view = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
+        view.isScrollEnabled = true
+        view.register(PostCollectionViewCell.self, forCellWithReuseIdentifier: "PostCollectionViewCell")
+        return view
+    }()
+    
+    private func collectionViewLayout() -> UICollectionViewFlowLayout {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 8
+        layout.minimumInteritemSpacing = 8
+        let size = UIScreen.main.bounds.width - 32
+        layout.itemSize = CGSize(width: size/3, height: size/2.5)
+        return layout
+    }
+    
     let contentField = {
         let view = UITextView()
         view.isEditable = true
@@ -57,7 +75,7 @@ class PostView: BaseView {
     override func configure() {
         super.configure()
         
-        for item in [titleField, contentField, hashtagField, postButton] {
+        for item in [titleField, collectionView, contentField, hashtagField, postButton] {
             addSubview(item)
         }
     }
@@ -69,8 +87,13 @@ class PostView: BaseView {
             make.horizontalEdges.equalToSuperview().inset(20)
             make.height.equalTo(60)
         }
-        contentField.snp.makeConstraints { make in
+        collectionView.snp.makeConstraints { make in
             make.top.equalTo(titleField.snp.bottom).offset(4)
+            make.horizontalEdges.equalTo(titleField)
+            make.height.equalTo((UIScreen.main.bounds.width - 32) / 2.5)
+        }
+        contentField.snp.makeConstraints { make in
+            make.top.equalTo(collectionView.snp.bottom).offset(4)
             make.horizontalEdges.equalTo(titleField)
             make.height.equalTo(240)
         }

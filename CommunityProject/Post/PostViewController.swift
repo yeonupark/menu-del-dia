@@ -120,11 +120,8 @@ class PostViewController: UIViewController {
             .bind(to: viewModel.hashTag)
             .disposed(by: disposeBag)
         
-        guard let blankImage = UIImage(named: "BlankImage") else { return }
-        guard let fakeData = blankImage.jpegData(compressionQuality: 0.5) else { return }
-        print("fakeData: ", fakeData)
         let post = Observable.combineLatest(viewModel.title, viewModel.content, viewModel.hashTag, viewModel.imageData) { title, content, hashtag, images in
-            return PostModel(title: title, content: content, file: [fakeData], product_id: "tmm", content1: hashtag, content2: nil)
+            return PostModel(title: title, content: content, file: images, product_id: "tmm", content1: hashtag, content2: nil)
         }
         
         mainView.postButton
@@ -187,7 +184,7 @@ extension PostViewController: PHPickerViewControllerDelegate {
                     
                     if let image = image as? UIImage {
                         imageValue.append(image)
-                        
+                        //guard let data = image.kf.data(format: .JPEG, compressionQuality: 0.5) else { return }
                         guard let data = image.jpegData(compressionQuality: 0.5) else { return }
                         dataValue.append(data)
                         

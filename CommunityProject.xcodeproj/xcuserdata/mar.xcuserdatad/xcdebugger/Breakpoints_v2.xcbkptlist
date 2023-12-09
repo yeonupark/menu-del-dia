@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "89264F8F-8F73-4B6B-8A7F-FAC91D1181F9"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "75D18F62-6E59-45B1-AB08-933DEA0919C8"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CommunityProject/Network/API.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "task"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "75D18F62-6E59-45B1-AB08-933DEA0919C8 - e43997f05d53101b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CommunityProject.SeSacAPI.task.getter : Moya.Task"
+                  moduleName = "CommunityProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mar/Library/Mobile%20Documents/com~apple~CloudDocs/Desktop/sesac/CommunityProject/CommunityProject/Network/API.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "84"
+                  endingLineNumber = "84"
+                  offsetFromSymbolStart = "3808">
+               </Location>
+               <Location
+                  uuid = "75D18F62-6E59-45B1-AB08-933DEA0919C8 - e43997f05d53101b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CommunityProject.SeSacAPI.task.getter : Moya.Task"
+                  moduleName = "CommunityProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mar/Library/Mobile%20Documents/com~apple~CloudDocs/Desktop/sesac/CommunityProject/CommunityProject/Network/API.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "84"
+                  endingLineNumber = "84"
+                  offsetFromSymbolStart = "3968">
+               </Location>
+               <Location
+                  uuid = "75D18F62-6E59-45B1-AB08-933DEA0919C8 - e43997f05d53101b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CommunityProject.SeSacAPI.task.getter : Moya.Task"
+                  moduleName = "CommunityProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mar/Library/Mobile%20Documents/com~apple~CloudDocs/Desktop/sesac/CommunityProject/CommunityProject/Network/API.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "84"
+                  endingLineNumber = "84"
+                  offsetFromSymbolStart = "3888">
+               </Location>
+               <Location
+                  uuid = "75D18F62-6E59-45B1-AB08-933DEA0919C8 - e43997f05d53101b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CommunityProject.SeSacAPI.task.getter : Moya.Task"
+                  moduleName = "CommunityProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mar/Library/Mobile%20Documents/com~apple~CloudDocs/Desktop/sesac/CommunityProject/CommunityProject/Network/API.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "84"
+                  endingLineNumber = "84"
+                  offsetFromSymbolStart = "4048">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

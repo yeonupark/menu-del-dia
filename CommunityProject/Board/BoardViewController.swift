@@ -48,7 +48,7 @@ class BoardViewController: UIViewController {
                 
                 if element.image.isEmpty {
                     DispatchQueue.main.async {
-                        cell.foodImage.image = UIImage(named: "br")
+                        cell.foodImage.image = UIImage(systemName: "star")
                     }
                 } else {
                     guard let url = URL(string: "\(APIkey.baseURL)\(element.image[0])") else { return }
@@ -60,15 +60,12 @@ class BoardViewController: UIViewController {
                         
                         return r
                     }
-                    
-                    DispatchQueue.main.async {
-                        cell.foodImage.kf.setImage(with: url, options: [.requestModifier(modifier)]) { result in
-                            switch result {
-                            case .success(_):
-                                return
-                            case .failure(let error):
-                                print("이미지 로딩 실패: \(error.localizedDescription)")
-                            }
+                    cell.foodImage.kf.setImage(with: url, placeholder: UIImage(systemName: "star"), options: [.requestModifier(modifier)]) { result in
+                        switch result {
+                        case .success(_):
+                            return
+                        case .failure(let error):
+                            print("이미지 로딩 실패: \(error.localizedDescription)")
                         }
                     }
                 }

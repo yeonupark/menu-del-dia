@@ -79,7 +79,7 @@ class MyPageViewController: UIViewController {
                     }
                 }
             } else {
-                print("error")
+                print("withdraw error")
             }
         }
     }

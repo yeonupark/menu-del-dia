@@ -26,25 +26,22 @@ class PostViewModel: BaseViewModel {
             switch result {
             case .success(let response):
                 if (200..<300).contains(response.statusCode) {
-                    print("success - ", response.statusCode, response.data)
+                    print("post success - ", response.statusCode, response.data)
                     
                     do {
                         let result = try JSONDecoder().decode(PostResponse.self, from: response.data)
-                        //print(result)
-                        print(result)
                         completionHandler(response.statusCode, result)
                     } catch {
-                        //print("error")
                         completionHandler(response.statusCode, nil)
                     }
                     
                 } else if (400..<501).contains(response.statusCode) {
-                    print("failure - ", response.statusCode, response.data)
+                    print("post failure - ", response.statusCode, response.data)
                     completionHandler(response.statusCode, nil)
                 }
                 
             case .failure(let error):
-                print("error - ", error)
+                print("post error - ", error)
                 completionHandler(999, nil)
             }
         }

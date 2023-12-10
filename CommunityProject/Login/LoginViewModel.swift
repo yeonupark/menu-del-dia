@@ -47,7 +47,7 @@ class LoginViewModel {
             
             switch result {
             case .success(let response):
-                print("success - ", response.statusCode, response.data)
+                print("login success - ", response.statusCode, response.data)
         
                 do {
                     let result = try JSONDecoder().decode(LoginResponse.self, from: response.data)
@@ -55,12 +55,12 @@ class LoginViewModel {
                     UserDefaults.standard.set(result.refreshToken, forKey: "refreshToken")
                     completionHandler(result)
                 } catch {
-                    print("error")
+                    print("login error")
                     completionHandler(nil)
                 }
                 
             case .failure(let error):
-                print("error - ", error)
+                print("login error - ", error)
                 completionHandler(nil)
             }
         

@@ -60,18 +60,17 @@ class BoardViewController: UIViewController {
                         
                         return r
                     }
-                    cell.foodImage.kf.setImage(with: url, placeholder: UIImage(systemName: "star"), options: [.requestModifier(modifier)]) { result in
+                    cell.foodImage.kf.setImage(with: url, placeholder: UIImage(systemName: "heart"), options: [.requestModifier(modifier)]) { result in
                         switch result {
                         case .success(_):
                             return
-                        case .failure(let error):
-                            print("이미지 로딩 실패: \(error.localizedDescription)")
+                        case .failure(_):
+                            print("이미지 로딩 실패")
                         }
                     }
                 }
             }
             .disposed(by: disposeBag)
-            
     }
     
     func setNavigationBar() {

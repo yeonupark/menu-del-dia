@@ -42,7 +42,6 @@ class PostView: BaseView {
         let view = UITextView()
         view.isEditable = true
         view.font = .systemFont(ofSize: 16)
-        view.text = "content"
         
         view.layer.cornerRadius = 5
         view.layer.borderWidth = 2
@@ -55,7 +54,6 @@ class PostView: BaseView {
         let view = UITextView()
         view.isEditable = true
         view.font = .systemFont(ofSize: 16)
-        view.text = "hash tag"
         view.layer.cornerRadius = 5
         view.layer.borderWidth = 2
         view.layer.borderColor = UIColor.orange.cgColor

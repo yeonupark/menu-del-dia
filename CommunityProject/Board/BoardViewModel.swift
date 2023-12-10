@@ -21,22 +21,22 @@ class BoardViewModel {
             switch result {
             case .success(let response):
                 if (200..<300).contains(response.statusCode) {
-                    print("success - ", response.statusCode, response.data)
+                    print("fetch success - ", response.statusCode, response.data)
                     
                     do {
                         let result = try JSONDecoder().decode(GetPostResponse.self, from: response.data)
                         
                         self.board.accept(result)
                     } catch {
-                        print("error")
+                        print("fetch error")
                     }
                     
                 } else if (400..<501).contains(response.statusCode) {
-                    print("failure - ", response.statusCode, response.data)
+                    print("fetch failure - ", response.statusCode, response.data)
                 }
                 
             case .failure(let error):
-                print("error - ", error)
+                print("fetch error - ", error)
             }
         }
     }

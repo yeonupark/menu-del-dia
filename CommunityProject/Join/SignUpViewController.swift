@@ -137,11 +137,12 @@ class SignUpViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(with: self) { owner, value in
                 owner.viewModel.signUpRequest(email: value.email, pw: value.password, nickname: value.nick, phoneNumber: value.phoneNum, birthDay: value.birthday) { response in
-                    if response == nil {
-                        // alert
-                    } else {
+                    if response {
                         // alert
                         owner.navigationController?.popViewController(animated: true)
+                    } else {
+                        // alert
+                        
                     }
                 }
             }

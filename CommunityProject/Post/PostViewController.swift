@@ -131,7 +131,6 @@ class PostViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(with: self) { owner, data in
                 owner.viewModel.postRequest(postModel: data) { code, response in
-                    print("뷰모델 imagedata: ", owner.viewModel.imageData.values)
                     
                     if code == 200 {
                         owner.navigationController?.popViewController(animated: true)
@@ -139,8 +138,10 @@ class PostViewController: UIViewController {
                         self.viewModel.callRefreshToken { value in
                             if value {
                                 // 토큰 리프레쉬 성공. post 요청
-                                self.viewModel.postRequest(postModel: data) { _, _ in
-                                    owner.navigationController?.popViewController(animated: true)
+                                self.viewModel.postRequest(postModel: data) { code, response in
+                                    if code == 200 {
+                                        owner.navigationController?.popViewController(animated: true)
+                                    }
                                 }
                             } else {
                                 // 토큰 리프레쉬 실패. 첫화면으로 돌아가서 다시 로그인 해야됨
@@ -149,7 +150,7 @@ class PostViewController: UIViewController {
                             }
                         }
                     } else {
-                        print("error")
+                        print("포스트 에러")
                     }
                     
                 }
@@ -177,21 +178,21 @@ extension PostViewController: PHPickerViewControllerDelegate {
                 
                 result.itemProvider.loadObject(ofClass: UIImage.self) { image, error in
                     
-                    
                     defer {
                         dispatchGroup.leave()
                     }
                     
                     if let image = image as? UIImage {
                         imageValue.append(image)
-                        //guard let data = image.kf.data(format: .JPEG, compressionQuality: 0.5) else { return }
-                        guard let data = image.jpegData(compressionQuality: 0.5) else { return }
+                        guard let data = image.kf.data(format: .JPEG, compressionQuality: 0.5) else { return }
+                        //guard let data = image.jpegData(compressionQuality: 0.5) else { return }
                         dataValue.append(data)
                         
                     }
                 }
             }
         }
+        
         dispatchGroup.notify(queue: .main) {
             let combinedObservable = Observable.zip(Observable.just(dataValue), Observable.just(imageValue))
             
@@ -202,9 +203,6 @@ extension PostViewController: PHPickerViewControllerDelegate {
                     owner.imageList.onNext(value.1)
                 }
                 .disposed(by: self.disposeBag)
-            
-            print(self.viewModel.imageData)
-            print(self.viewModel.imageData.values)
         }
     }
 }

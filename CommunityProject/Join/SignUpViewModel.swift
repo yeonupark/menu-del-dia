@@ -67,55 +67,48 @@ class SignUpViewModel {
             switch result {
             case .success(let response):
                 if (200..<300).contains(response.statusCode) {
-                    print("success - ", response.statusCode, response.data)
+                    print("emailvalidation success - ", response.statusCode, response.data)
                     
-                    do {
-                        let result = try JSONDecoder().decode(EmailResponse.self, from: response.data)
-                        print(result)
-                    } catch {
-                        print("error")
-                    }
                     completionHandler(true)
                     
                 } else if (400..<501).contains(response.statusCode) {
-                    print("failure - ", response.statusCode, response.data)
+                    print("emailvalidation failure - ", response.statusCode, response.data)
                     
-                    do {
-                        let result = try JSONDecoder().decode(EmailResponse.self, from: response.data)
-                        print(result)
-                    } catch {
-                        print("error")
-                    }
+//                    do {
+//                        let result = try JSONDecoder().decode(EmailResponse.self, from: response.data)
+//                    } catch {
+//                        print("signup error")
+//                    }
                     completionHandler(false)
                 }
                 
             case .failure(let error):
-                print("error - ", error)
+                print("emailvalidation error - ", error)
                 completionHandler(false)
             }
         }
         
     }
     
-    func signUpRequest(email: String, pw: String, nickname: String, phoneNumber: String?, birthDay: String?, completionHandler: @escaping (JoinResponse?) -> Void) {
+    func signUpRequest(email: String, pw: String, nickname: String, phoneNumber: String?, birthDay: String?, completionHandler: @escaping (Bool) -> Void) {
         provider.request(.join(model: JoinModel(email: email, password: pw, nick: nickname, phoneNum: phoneNumber, birthday: birthDay))) { result in
             
             switch result {
             case .success(let response):
-                print("success - ", response.statusCode, response.data)
+                print("signup success - ", response.statusCode, response.data)
         
                 do {
                     let result = try JSONDecoder().decode(JoinResponse.self, from: response.data)
                     print(result)
-                    completionHandler(result)
+                    completionHandler(true)
                 } catch {
-                    print("error")
-                    completionHandler(nil)
+                    print("signup error")
+                    completionHandler(false)
                 }
                 
             case .failure(let error):
-                print("error - ", error)
-                completionHandler(nil)
+                print("signup error - ", error)
+                completionHandler(false)
             }
         
         }

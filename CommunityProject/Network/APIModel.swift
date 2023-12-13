@@ -112,3 +112,10 @@ struct Comment: Decodable {
     let _id, content, time: String
     let creator: Creator
 }
+
+struct MyProfileResponse: Decodable {
+    let posts, followers, following: [String]
+    let _id, email, nick: String
+    let phoneNum, birthDay: String?
+    let profile: String?
+}

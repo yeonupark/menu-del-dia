@@ -16,6 +16,7 @@ enum SeSacAPI {
     case withdraw
     case post(model: PostModel)
     case getPost(parameter: GetPost)
+    case getMyprofile
 }
 
 extension SeSacAPI: TargetType {
@@ -25,7 +26,7 @@ extension SeSacAPI: TargetType {
         switch self {
         case .join, .login, .emailValidation, .refresh, .withdraw:
             URL(string: APIkey.testURL)!
-        case .post, .getPost:
+        case .post, .getPost, .getMyprofile:
             URL(string: APIkey.baseURL)!
         }
     
@@ -45,6 +46,8 @@ extension SeSacAPI: TargetType {
             "withdraw"
         case .post, .getPost:
             "post"
+        case .getMyprofile:
+            "profile/me"
         }
     }
     
@@ -52,7 +55,7 @@ extension SeSacAPI: TargetType {
         switch self {
         case .join, .login, .emailValidation, .post:
             return .post
-        case .getPost, .refresh, .withdraw:
+        case .getPost, .refresh, .withdraw, .getMyprofile:
             return .get
         }
     }
@@ -98,6 +101,8 @@ extension SeSacAPI: TargetType {
         case .getPost(let parameters):
             let parameters = parameters.getParameters()
             return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
+        case .getMyprofile:
+            return .requestPlain
         }
         
     }
@@ -118,7 +123,7 @@ extension SeSacAPI: TargetType {
              "SesacKey" : APIkey.sesacKey,
              "Refresh" : UserDefaults.standard.string(forKey: "refreshToken") ?? ""]
         
-        case .withdraw, .getPost:
+        case .withdraw, .getPost, .getMyprofile:
              ["Authorization" : UserDefaults.standard.string(forKey: "token") ?? "",
              "SesacKey" : APIkey.sesacKey]
         }

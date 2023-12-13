@@ -76,6 +76,7 @@ class BoardViewController: UIViewController {
     func setNavigationBar() {
         navigationItem.hidesBackButton = true
         let myPageButton = UIBarButtonItem(title: "MY", style: .plain, target: self, action: #selector(myPageButtonClicked))
+        myPageButton.tintColor = .black
         
         navigationItem.setRightBarButton(myPageButton, animated: true)
     }

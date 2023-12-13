@@ -184,8 +184,8 @@ extension PostViewController: PHPickerViewControllerDelegate {
                     
                     if let image = image as? UIImage {
                         imageValue.append(image)
-                        guard let data = image.kf.data(format: .JPEG, compressionQuality: 0.5) else { return }
-                        //guard let data = image.jpegData(compressionQuality: 0.5) else { return }
+                        guard let data = image.kf.data(format: .JPEG, compressionQuality: 0.1) else { return }
+                        //guard let data = image.jpegData(compressionQuality: 0.1) else { return }
                         dataValue.append(data)
                         
                     }

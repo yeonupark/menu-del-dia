@@ -18,70 +18,67 @@ class MyPageViewController: UIViewController {
     
     let viewModel = MyPageViewModel()
     let disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setTableView()
-    }
-    
-    func setTableView() {
-        viewModel.items
-            .bind(to: mainView.tableView.rx.items(cellIdentifier: "Cell", cellType: UITableViewCell.self)) { row, element, cell in
-                cell.textLabel?.text = element
-                
-                if row == 2 {
-                    cell.textLabel?.textColor = .red
-                }
-            }
-            .disposed(by: disposeBag)
-        
-        mainView.tableView
-            .rx
-            .itemSelected
-            .observe(on: MainScheduler.instance)
-            .subscribe(with: self) { owner, indexPath in
-                switch indexPath.row {
-                case 0 : print("마이프로필")
-                case 1 : owner.logout()
-                case 2 : owner.withdraw()
-                default: print("디폴트")
-                }
-            }
-            .disposed(by: disposeBag)
+        setNavigationBar()
+        bind()
+        fetchMyData()
         
     }
     
-    func logout() {
-        let vc = LoginViewController()
-        navigationController?.setViewControllers([vc], animated: true)
-        UserDefaults.standard.set("", forKey: "token")
-        UserDefaults.standard.set("", forKey: "refreshToken")
-    }
-    
-    func withdraw() {
-        let vc = LoginViewController()
-        
-        viewModel.callWithdrawRequest { result in
-            if result == 200 {
-                self.navigationController?.setViewControllers([vc], animated: true)
-                
-            } else if result == 419 {
+    func fetchMyData() {
+        viewModel.getMyProfile { statusCode in
+            if statusCode == 419 {
                 self.viewModel.callRefreshToken { value in
                     if value {
                         // 토큰 리프레쉬 성공. 탈퇴요청 다시
-                        self.viewModel.callWithdrawRequest { _ in
-                            self.navigationController?.setViewControllers([vc], animated: true)
+                        self.viewModel.getMyProfile { code in
+                            print("getMyProfile 재호출 결과 statusCode: \(code)")
                         }
                     } else {
                         // 토큰 리프레쉬 실패. 첫화면으로 돌아가서 다시 로그인 해야됨
-                        // alert
-                        self.navigationController?.setViewControllers([vc], animated: true)
+                        self.navigationController?.setViewControllers([LoginViewController()], animated: true)
                     }
                 }
-            } else {
-                print("withdraw error")
             }
         }
+    }
+    
+    func bind() {
+//        viewModel.profileUrl
+//            .bind(to: <#T##String...##String#>)
+        viewModel.nickname
+            .bind(to: mainView.nicknameLabel.rx.text)
+            .disposed(by: disposeBag)
+        viewModel.post
+            .map { "\($0)" }
+            .bind(to: mainView.postNumberLabel.rx.text)
+            .disposed(by: disposeBag)
+        viewModel.follower
+            .map { "\($0)" }
+            .bind(to: mainView.followerNumberLabel.rx.text)
+            .disposed(by: disposeBag)
+        viewModel.following
+            .map { "\($0)" }
+            .bind(to: mainView.followingNumberLabel.rx.text)
+            .disposed(by: disposeBag)
+    }
+    
+    func setNavigationBar() {
+        let settingButton = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .plain, target: self, action: nil)
+        settingButton.tintColor = .black
+        
+        navigationItem.setRightBarButton(settingButton, animated: true)
+        
+        settingButton.rx
+            .tap
+            .subscribe(with: self) { owner, _ in
+                let vc = SettingViewController()
+                owner.navigationController?.pushViewController(vc, animated: true)
+            }
+            .disposed(by: disposeBag)
     }
     
 }

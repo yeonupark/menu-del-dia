@@ -25,6 +25,12 @@
 		4849B3652B0A0DC800CBE244 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 4849B3642B0A0DC800CBE244 /* RxCocoa */; };
 		4849B3672B0A0DC800CBE244 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 4849B3662B0A0DC800CBE244 /* RxRelay */; };
 		4849B3692B0A0DC800CBE244 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4849B3682B0A0DC800CBE244 /* RxSwift */; };
+		48C045912B299F7700C1139A /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C045902B299F7700C1139A /* EditProfileViewController.swift */; };
+		48C045932B299F9E00C1139A /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C045922B299F9E00C1139A /* EditProfileView.swift */; };
+		48C045952B299FA900C1139A /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C045942B299FA900C1139A /* EditProfileViewModel.swift */; };
+		48C045992B29A53C00C1139A /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C045982B29A53C00C1139A /* SettingViewController.swift */; };
+		48C0459B2B29A54200C1139A /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C0459A2B29A54200C1139A /* SettingView.swift */; };
+		48C0459D2B29A54800C1139A /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C0459C2B29A54800C1139A /* SettingViewModel.swift */; };
 		48DA22AD2B0E50A400A6FD56 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 48DA22AC2B0E50A400A6FD56 /* .gitignore */; };
 		48DA22B12B0E522F00A6FD56 /* APIkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA22B02B0E522F00A6FD56 /* APIkey.swift */; };
 		48DA22B32B0E533900A6FD56 /* APIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA22B22B0E533900A6FD56 /* APIModel.swift */; };
@@ -83,6 +89,12 @@
 		4849B35D2B085B3C00CBE244 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		4849B35F2B08645000CBE244 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		4849B3612B0A0A6800CBE244 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		48C045902B299F7700C1139A /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		48C045922B299F9E00C1139A /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		48C045942B299FA900C1139A /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
+		48C045982B29A53C00C1139A /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		48C0459A2B29A54200C1139A /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		48C0459C2B29A54800C1139A /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		48DA22AC2B0E50A400A6FD56 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		48DA22B02B0E522F00A6FD56 /* APIkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIkey.swift; sourceTree = "<group>"; };
 		48DA22B22B0E533900A6FD56 /* APIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModel.swift; sourceTree = "<group>"; };
@@ -238,6 +250,12 @@
 				48DA23102B1369FA00A6FD56 /* MyPageViewController.swift */,
 				48DA23142B136A2600A6FD56 /* MyPageView.swift */,
 				48F8B27A2B1863090096A108 /* MyPageViewModel.swift */,
+				48C045902B299F7700C1139A /* EditProfileViewController.swift */,
+				48C045922B299F9E00C1139A /* EditProfileView.swift */,
+				48C045942B299FA900C1139A /* EditProfileViewModel.swift */,
+				48C045982B29A53C00C1139A /* SettingViewController.swift */,
+				48C0459A2B29A54200C1139A /* SettingView.swift */,
+				48C0459C2B29A54800C1139A /* SettingViewModel.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -410,14 +428,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48C045992B29A53C00C1139A /* SettingViewController.swift in Sources */,
+				48C0459D2B29A54800C1139A /* SettingViewModel.swift in Sources */,
+				48C045912B299F7700C1139A /* EditProfileViewController.swift in Sources */,
 				48F8B24D2B174A140096A108 /* BoardTableViewCell.swift in Sources */,
 				48DA23332B14A16900A6FD56 /* PostViewModel.swift in Sources */,
 				48DA23042B0F389E00A6FD56 /* API.swift in Sources */,
+				48C045952B299FA900C1139A /* EditProfileViewModel.swift in Sources */,
 				4849B3402B0360B600CBE244 /* LoginViewController.swift in Sources */,
 				48DA22B12B0E522F00A6FD56 /* APIkey.swift in Sources */,
 				48F8B27D2B186B440096A108 /* BaseViewModel.swift in Sources */,
 				48DA23172B136AC800A6FD56 /* TabBarController.swift in Sources */,
 				4849B3602B08645000CBE244 /* SignUpViewController.swift in Sources */,
+				48C045932B299F9E00C1139A /* EditProfileView.swift in Sources */,
 				48DA231C2B1370B800A6FD56 /* BoardView.swift in Sources */,
 				48F8B27B2B1863090096A108 /* MyPageViewModel.swift in Sources */,
 				4849B3622B0A0A6800CBE244 /* SignUpViewModel.swift in Sources */,
@@ -427,6 +450,7 @@
 				48DA23112B1369FA00A6FD56 /* MyPageViewController.swift in Sources */,
 				4849B3582B08547800CBE244 /* BaseView.swift in Sources */,
 				48DA23312B14992100A6FD56 /* PostViewController.swift in Sources */,
+				48C0459B2B29A54200C1139A /* SettingView.swift in Sources */,
 				48DA231A2B1370A300A6FD56 /* BoardViewController.swift in Sources */,
 				48DA230E2B10406C00A6FD56 /* LoginViewModel.swift in Sources */,
 				4849B3432B0362A900CBE244 /* LoginView.swift in Sources */,

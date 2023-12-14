@@ -131,12 +131,12 @@ class MyPageView: BaseView {
         }
         nicknameLabel.snp.makeConstraints { make in
             make.top.equalTo(profileImage.snp.bottom).offset(6)
-            make.height.equalTo(15)
+            make.height.equalTo(17)
             make.centerX.equalToSuperview()
         }
         editProfileButton.snp.makeConstraints { make in
             make.top.equalTo(nicknameLabel.snp.bottom).offset(6)
-            make.height.equalTo(15)
+            make.height.equalTo(17)
             make.centerX.equalToSuperview()
         }
         postButton.snp.makeConstraints { make in

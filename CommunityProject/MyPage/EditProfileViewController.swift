@@ -6,8 +6,20 @@
 //
 
 import UIKit
+import RxSwift
 
 class EditProfileViewController: UIViewController {
     
+    let mainView = EditProfileView()
     
+    override func loadView() {
+        view.self = mainView
+    }
+    
+    let viewModel = MyPageViewModel()
+    let disposeBag = DisposeBag()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
 }

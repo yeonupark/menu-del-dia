@@ -79,6 +79,15 @@ class MyPageViewController: UIViewController {
                 owner.navigationController?.pushViewController(vc, animated: true)
             }
             .disposed(by: disposeBag)
+        
+        mainView.editProfileButton.rx
+            .tap
+            .observe(on: MainScheduler.instance)
+            .subscribe(with: self) { owner, _ in
+                let vc = EditProfileViewController()
+                owner.navigationController?.pushViewController(vc, animated: true)
+            }
+            .disposed(by: disposeBag)
     }
     
 }

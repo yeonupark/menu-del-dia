@@ -11,9 +11,9 @@ import Moya
 
 class PostViewModel: BaseViewModel {
     
-    let title = PublishSubject<String>()
-    let content = PublishSubject<String>()
-    let hashTag = PublishSubject<String>()
+    let title = BehaviorSubject(value: "") //= PublishSubject<String>()
+    let content = BehaviorSubject(value: "") //= PublishSubject<String>()
+    let hashTag = BehaviorSubject(value: "") //= PublishSubject<String>()
     
     let imageData = PublishSubject<[Data]>()
     

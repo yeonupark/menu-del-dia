@@ -25,7 +25,12 @@ class MyPageViewController: UIViewController {
         setNavigationBar()
         bind()
         fetchMyData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
         
+        fetchMyData()
     }
     
     func fetchMyData() {
@@ -74,6 +79,7 @@ class MyPageViewController: UIViewController {
         
         settingButton.rx
             .tap
+            .observe(on: MainScheduler.instance)
             .subscribe(with: self) { owner, _ in
                 let vc = SettingViewController()
                 owner.navigationController?.pushViewController(vc, animated: true)

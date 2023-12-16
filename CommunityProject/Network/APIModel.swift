@@ -114,8 +114,14 @@ struct Comment: Decodable {
 }
 
 struct MyProfileResponse: Decodable {
-    let posts, followers, following: [String]
+    let posts: [String]
+    let followers, following: [Creator]
     let _id, email, nick: String
     let phoneNum, birthDay: String?
     let profile: String?
+}
+
+struct MyProfileModel: Encodable {
+    let nick, phoneNum, birthDay: String?
+    let profile: Data?
 }

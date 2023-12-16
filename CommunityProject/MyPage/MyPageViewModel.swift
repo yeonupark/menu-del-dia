@@ -23,7 +23,7 @@ class MyPageViewModel: BaseViewModel {
     
     func getMyProfile(completionHandler: @escaping (Int) -> Void) {
         
-        provider.request(.getMyprofile) { result in
+        provider.request(.getMyProfile) { result in
             switch result {
             case .success(let response):
                 if response.statusCode == 200 {

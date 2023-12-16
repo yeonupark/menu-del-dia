@@ -16,7 +16,8 @@ enum SeSacAPI {
     case withdraw
     case post(model: PostModel)
     case getPost(parameter: GetPost)
-    case getMyprofile
+    case getMyProfile
+    case editMyProfile(model: MyProfileModel)
 }
 
 extension SeSacAPI: TargetType {
@@ -26,7 +27,7 @@ extension SeSacAPI: TargetType {
         switch self {
         case .join, .login, .emailValidation, .refresh, .withdraw:
             URL(string: APIkey.testURL)!
-        case .post, .getPost, .getMyprofile:
+        case .post, .getPost, .getMyProfile, .editMyProfile:
             URL(string: APIkey.baseURL)!
         }
     
@@ -46,7 +47,7 @@ extension SeSacAPI: TargetType {
             "withdraw"
         case .post, .getPost:
             "post"
-        case .getMyprofile:
+        case .getMyProfile, .editMyProfile:
             "profile/me"
         }
     }
@@ -55,8 +56,10 @@ extension SeSacAPI: TargetType {
         switch self {
         case .join, .login, .emailValidation, .post:
             return .post
-        case .getPost, .refresh, .withdraw, .getMyprofile:
+        case .getPost, .refresh, .withdraw, .getMyProfile:
             return .get
+        case .editMyProfile:
+            return .put
         }
     }
     
@@ -101,8 +104,24 @@ extension SeSacAPI: TargetType {
         case .getPost(let parameters):
             let parameters = parameters.getParameters()
             return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
-        case .getMyprofile:
+        case .getMyProfile:
             return .requestPlain
+        case .editMyProfile(let model):
+            var formData: [MultipartFormData] = []
+            
+            if let nick = model.nick {
+                formData.append(MultipartFormData(provider: .data(nick.data(using: .utf8)!), name: "nick"))
+            }
+            if let birthDay = model.birthDay {
+                formData.append(MultipartFormData(provider: .data(birthDay.data(using: .utf8)!), name: "birthDay"))
+            }
+            if let phoneNum = model.phoneNum {
+                formData.append(MultipartFormData(provider: .data(phoneNum.data(using: .utf8)!), name: "phoneNum"))
+            }
+            if let profile = model.profile {
+                formData.append(MultipartFormData(provider: .data(profile), name: "file", fileName: "hi.jpeg", mimeType: "image/jpeg"))
+            }
+            return .uploadMultipart(formData)
         }
         
     }
@@ -113,7 +132,7 @@ extension SeSacAPI: TargetType {
             ["Content-Type" : "application/json",
              "SesacKey" : APIkey.sesacKey]
             
-        case .post:
+        case .post, .editMyProfile:
             ["Content-Type" : "multipart/form-data",
              "Authorization" : UserDefaults.standard.string(forKey: "token") ?? "",
              "SesacKey" : APIkey.sesacKey]
@@ -123,7 +142,7 @@ extension SeSacAPI: TargetType {
              "SesacKey" : APIkey.sesacKey,
              "Refresh" : UserDefaults.standard.string(forKey: "refreshToken") ?? ""]
         
-        case .withdraw, .getPost, .getMyprofile:
+        case .withdraw, .getPost, .getMyProfile:
              ["Authorization" : UserDefaults.standard.string(forKey: "token") ?? "",
              "SesacKey" : APIkey.sesacKey]
         }

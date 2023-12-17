@@ -18,6 +18,8 @@ class EditProfileViewModel: BaseViewModel {
     let phoneNumber = BehaviorRelay(value: "닝닝")// = PublishRelay<String>()
     let birthday = BehaviorRelay(value: "닝닝") // = PublishRelay<String>()
     
+    let profileData = BehaviorRelay(value: Data())
+    
     private let provider = MoyaProvider<SeSacAPI>()
     
     func getMyProfile(completionHandler: @escaping (Int) -> Void) {

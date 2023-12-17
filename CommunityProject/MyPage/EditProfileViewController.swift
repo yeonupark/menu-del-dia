@@ -7,6 +7,8 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
+import PhotosUI
 
 class EditProfileViewController: UIViewController {
     
@@ -18,6 +20,8 @@ class EditProfileViewController: UIViewController {
     
     let viewModel = EditProfileViewModel()
     let disposeBag = DisposeBag()
+    
+    let profileImage = BehaviorRelay(value: UIImage(systemName: "person.circle"))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,9 +38,9 @@ class EditProfileViewController: UIViewController {
 
         navigationItem.setRightBarButton(saveButton, animated: true)
         
-        let myProfile = Observable.combineLatest(viewModel.profileUrl, viewModel.nickname, viewModel.phoneNumber, viewModel.birthday) { url, nick, phone, birthday in
+        let myProfile = Observable.combineLatest(viewModel.profileData, viewModel.nickname, viewModel.phoneNumber, viewModel.birthday) { data, nick, phone, birthday in
             
-            return MyProfileModel(nick: nick, phoneNum: phone, birthDay: birthday, profile: nil)
+            return MyProfileModel(nick: nick, phoneNum: phone, birthDay: birthday, profile: data)
         }
         
         saveButton
@@ -45,7 +49,6 @@ class EditProfileViewController: UIViewController {
             .withLatestFrom(myProfile)
             .observe(on: MainScheduler.instance)
             .subscribe(with: self) { owner, model in
-                print("버튼 클릭")
                 owner.viewModel.editMyProfile(myProfile: model) { statusCode in
                     if statusCode == 419 {
                         self.viewModel.callRefreshToken { value in
@@ -105,5 +108,95 @@ class EditProfileViewController: UIViewController {
                 owner.viewModel.birthday.accept(day)
             }
             .disposed(by: disposeBag)
+        
+        profileImage
+            .bind(to: mainView.profileImage.rx.image)
+            .disposed(by: disposeBag)
+        
+        mainView.editImageButton
+            .rx
+            .tap
+            .subscribe(with: self) { owner, _ in
+                self.checkAuthorization()
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    func checkAuthorization() {
+        
+        let status = PHPhotoLibrary.authorizationStatus()
+        
+        if status == .authorized {
+            showImagePicker()
+        } else if status == .denied || status == .restricted {
+            showDeniedAlert()
+        } else {
+            PHPhotoLibrary.requestAuthorization { status in
+                if status == .authorized {
+                    DispatchQueue.main.async {
+                        self.showImagePicker()
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.showDeniedAlert()
+                    }
+                }
+            }
+        }
+        
+    }
+    
+    func showDeniedAlert() {
+        let alert = UIAlertController(title: "갤러리에 접근할 수 없습니다.", message: "기기의 '설정>개인정보 보호'에서 갤러리 접근 권한을 허용해주세요.", preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        let goToSetting = UIAlertAction(title: "설정으로 이동", style: .destructive) { _ in
+            if let appSetting = URL(string: UIApplication.openSettingsURLString){
+                UIApplication.shared.open(appSetting)
+            }
+        }
+        alert.addAction(cancel)
+        alert.addAction(goToSetting)
+        present(alert, animated: true)
+    }
+    
+    func showImagePicker() {
+        
+        var configuration = PHPickerConfiguration()
+        configuration.filter = .images
+        configuration.selectionLimit = 1
+        let picker = PHPickerViewController(configuration: configuration)
+        
+        picker.delegate = self
+        
+        present(picker, animated: true)
+    }
+}
+
+extension EditProfileViewController: PHPickerViewControllerDelegate {
+    
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        
+        picker.dismiss(animated: true)
+        
+        guard let result = results.first else {
+            return
+        }
+        
+        if result.itemProvider.canLoadObject(ofClass: UIImage.self) {
+            
+            result.itemProvider.loadObject(ofClass: UIImage.self) { image, error in
+                
+                if let image = image as? UIImage {
+                    
+                    self.profileImage.accept(image)
+                    
+                    guard let data = image.kf.data(format: .JPEG, compressionQuality: 0.1) else { return }
+                    self.viewModel.profileData.accept(data)
+                    
+                }
+                
+            }
+            
+        }
     }
 }

@@ -15,6 +15,9 @@ class BoardTableViewCell: UITableViewCell {
         view.image = UIImage(systemName: "person.circle")
         view.tintColor = .black
         
+        view.contentMode = .scaleAspectFill
+        view.clipsToBounds = true
+        
         return view
     }()
     

@@ -33,7 +33,7 @@ class BoardViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        viewModel.fetchPost(limit: "10", product_id: "")
+        viewModel.fetchPost(limit: "10", product_id: "tmm")
     }
     
     func bind() {
@@ -41,25 +41,43 @@ class BoardViewController: UIViewController {
             .map { $0.data }
             .bind(to: mainView.tableView.rx.items(cellIdentifier: "BoardTableViewCell", cellType: BoardTableViewCell.self)) { (row, element, cell) in
                 cell.userLabel.text = element.creator.nick
-                cell.dateLabel.text = element.time
+                
+                let str = element.time
+                
+                let s = str.index(str.startIndex, offsetBy: 5)
+                let e = str.index(str.startIndex, offsetBy: 9)
+                let day = str[s...e]
+                let start = str.index(str.startIndex, offsetBy: 11)
+                let end = str.index(str.startIndex, offsetBy: 15)
+                let time = str[start...end]
+                
+                cell.dateLabel.text = "\(day) \(time)"
                 cell.titleLabel.text = element.title
                 cell.contentLabel.text = element.content
                 cell.hashtagLabel.text = element.content1
                 
+                let modifier = AnyModifier { request in
+                    var r = request
+                    r.setValue(APIkey.sesacKey, forHTTPHeaderField: "SesacKey")
+                    r.setValue(UserDefaults.standard.string(forKey: "token") ?? "", forHTTPHeaderField: "Authorization")
+                    
+                    return r
+                }
+                
+                if let profileUrl = element.creator.profile {
+                    guard let url = URL(string: "\(APIkey.baseURL)\(profileUrl)") else { return }
+                    
+                    cell.profileImage.kf.setImage(with: url, options: [.requestModifier(modifier)]) { result in
+                    }
+                }
+                
                 if element.image.isEmpty {
                     DispatchQueue.main.async {
-                        cell.foodImage.image = UIImage(systemName: "star")
+                        cell.foodImage.image = UIImage(systemName: "nosign")
                     }
                 } else {
                     guard let url = URL(string: "\(APIkey.baseURL)\(element.image[0])") else { return }
-                    
-                    let modifier = AnyModifier { request in
-                        var r = request
-                        r.setValue(APIkey.sesacKey, forHTTPHeaderField: "SesacKey")
-                        r.setValue(UserDefaults.standard.string(forKey: "token") ?? "", forHTTPHeaderField: "Authorization")
-                        
-                        return r
-                    }
+                
                     cell.foodImage.kf.setImage(with: url, placeholder: UIImage(systemName: "heart"), options: [.requestModifier(modifier)]) { result in
                         switch result {
                         case .success(_):

@@ -71,7 +71,7 @@ class PostViewController: UIViewController {
         
         var configuration = PHPickerConfiguration()
         configuration.filter = .images
-        configuration.selectionLimit = 50
+        configuration.selectionLimit = 1
         let picker = PHPickerViewController(configuration: configuration)
         
         picker.delegate = self

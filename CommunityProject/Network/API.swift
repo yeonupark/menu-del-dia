@@ -89,7 +89,7 @@ extension SeSacAPI: TargetType {
             if let files = post.file {
                 for file in files {
                     if let file = file {
-                        formData.append(MultipartFormData(provider: .data(file), name: "file", fileName: "hi.jpeg", mimeType: "image/jpeg"))
+                        formData.append(MultipartFormData(provider: .data(file), name: "file", fileName: "file.jpeg", mimeType: "image/jpeg"))
                     }
                 }
             }
@@ -119,7 +119,7 @@ extension SeSacAPI: TargetType {
                 formData.append(MultipartFormData(provider: .data(phoneNum.data(using: .utf8)!), name: "phoneNum"))
             }
             if let profile = model.profile {
-                formData.append(MultipartFormData(provider: .data(profile), name: "file", fileName: "hi.jpeg", mimeType: "image/jpeg"))
+                formData.append(MultipartFormData(provider: .data(profile), name: "profile", fileName: "profile.jpeg", mimeType: "image/jpeg"))
             }
             return .uploadMultipart(formData)
         }

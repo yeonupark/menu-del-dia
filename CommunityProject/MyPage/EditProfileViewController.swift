@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import PhotosUI
+import Kingfisher
 
 class EditProfileViewController: UIViewController {
     
@@ -26,10 +27,12 @@ class EditProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bind()
         viewModel.getMyProfile { num in
             print(num)
         }
+
+        bind()
+        
         setNavigationBar()
     }
     
@@ -50,16 +53,20 @@ class EditProfileViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(with: self) { owner, model in
                 owner.viewModel.editMyProfile(myProfile: model) { statusCode in
+                    if statusCode == 200 {
+                        owner.navigationController?.popViewController(animated: true)
+                    }
                     if statusCode == 419 {
-                        self.viewModel.callRefreshToken { value in
+                        owner.viewModel.callRefreshToken { value in
                             if value {
                                 // 토큰 리프레쉬 성공. 탈퇴요청 다시
-                                self.viewModel.getMyProfile { code in
+                                owner.viewModel.getMyProfile { code in
                                     print("getMyProfile 재호출 결과 statusCode: \(code)")
                                 }
+                                owner.navigationController?.popViewController(animated: true)
                             } else {
                                 // 토큰 리프레쉬 실패. 첫화면으로 돌아가서 다시 로그인 해야됨
-                                self.navigationController?.setViewControllers([LoginViewController()], animated: true)
+                                owner.navigationController?.setViewControllers([LoginViewController()], animated: true)
                             }
                         }
                     }
@@ -82,6 +89,36 @@ class EditProfileViewController: UIViewController {
             .disposed(by: disposeBag)
         viewModel.birthday
             .bind(to: mainView.birthdayTextField.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.profileUrl
+            .map { "\(APIkey.baseURL)\($0)" }
+            .subscribe(with: self) { owner, urlString in
+                print("urlString", urlString)
+                guard let url = URL(string: urlString) else { return }
+                
+                let modifier = AnyModifier { request in
+                    var r = request
+                    r.setValue(APIkey.sesacKey, forHTTPHeaderField: "SesacKey")
+                    r.setValue(UserDefaults.standard.string(forKey: "token") ?? "", forHTTPHeaderField: "Authorization")
+                    
+                    return r
+                }
+                owner.mainView.profileImage.kf.setImage(with: url, options: [.requestModifier(modifier)]) { result in
+                    switch result {
+                    case .success(_):
+                        if let data = owner.mainView.profileImage.image?.kf.data(format: .JPEG, compressionQuality: 1.0) {
+                            owner.viewModel.profileData.accept(data)
+                        } else {
+                            print("Failed to get image data")
+                        }
+                        return
+                    case .failure(_):
+                        print("이미지 로딩 실패")
+                    }
+                }
+                
+            }
             .disposed(by: disposeBag)
         
         mainView.nickTextField
@@ -187,12 +224,14 @@ extension EditProfileViewController: PHPickerViewControllerDelegate {
             result.itemProvider.loadObject(ofClass: UIImage.self) { image, error in
                 
                 if let image = image as? UIImage {
-                    
-                    self.profileImage.accept(image)
-                    
-                    guard let data = image.kf.data(format: .JPEG, compressionQuality: 0.1) else { return }
-                    self.viewModel.profileData.accept(data)
-                    
+                    DispatchQueue.main.async {
+                        
+                        self.profileImage.accept(image)
+                        
+                        guard let data = image.kf.data(format: .JPEG, compressionQuality: 0.0) else { return }
+                        self.viewModel.profileData.accept(data)
+                        
+                    }
                 }
                 
             }

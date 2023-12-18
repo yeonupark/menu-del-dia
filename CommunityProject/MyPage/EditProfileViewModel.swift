@@ -12,11 +12,11 @@ import Moya
 
 class EditProfileViewModel: BaseViewModel {
     let email = PublishRelay<String>()
-    let profileUrl = BehaviorRelay(value: "닝닝")// = PublishRelay<String>()
+    let profileUrl = PublishRelay<String>()// = PublishRelay<String>()
 
-    let nickname = BehaviorRelay(value: "닝닝") //= PublishRelay<String>()
-    let phoneNumber = BehaviorRelay(value: "닝닝")// = PublishRelay<String>()
-    let birthday = BehaviorRelay(value: "닝닝") // = PublishRelay<String>()
+    let nickname = BehaviorRelay(value: "ㅇㅇ") //= PublishRelay<String>()
+    let phoneNumber = BehaviorRelay(value: "ㅇㅇ")// = PublishRelay<String>()
+    let birthday = BehaviorRelay(value: "ㅇㅇ") // = PublishRelay<String>()
     
     let profileData = BehaviorRelay(value: Data())
     
@@ -65,6 +65,7 @@ class EditProfileViewModel: BaseViewModel {
         provider.request(.editMyProfile(model: myProfile)) { result in
             switch result {
             case .success(let response):
+                print("editMyProfile API 호출 결과 - ", response.statusCode)
                 completionHandler(response.statusCode)
                 
             case .failure(let error):

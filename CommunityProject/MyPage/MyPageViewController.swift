@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import Kingfisher
 
 class MyPageViewController: UIViewController {
     
@@ -52,8 +53,30 @@ class MyPageViewController: UIViewController {
     }
     
     func bind() {
-//        viewModel.profileUrl
-//            .bind(to: <#T##String...##String#>)
+        viewModel.profileUrl
+            .map { "\(APIkey.baseURL)\($0)" }
+            .subscribe(with: self) { owner, urlString in
+                print("urlString", urlString)
+                guard let url = URL(string: urlString) else { return }
+                
+                let modifier = AnyModifier { request in
+                    var r = request
+                    r.setValue(APIkey.sesacKey, forHTTPHeaderField: "SesacKey")
+                    r.setValue(UserDefaults.standard.string(forKey: "token") ?? "", forHTTPHeaderField: "Authorization")
+                    
+                    return r
+                }
+                owner.mainView.profileImage.kf.setImage(with: url, options: [.requestModifier(modifier)]) { result in
+                    switch result {
+                    case .success(_):
+                        return
+                    case .failure(_):
+                        print("이미지 로딩 실패")
+                    }
+                }
+            }
+            .disposed(by: disposeBag)
+        
         viewModel.nickname
             .bind(to: mainView.nicknameLabel.rx.text)
             .disposed(by: disposeBag)

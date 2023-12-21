@@ -125,3 +125,7 @@ struct MyProfileModel: Encodable {
     let nick, phoneNum, birthDay: String?
     let profile: Data?
 }
+
+struct LikeResponse: Decodable {
+    let like_status: Bool
+}

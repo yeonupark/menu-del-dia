@@ -37,25 +37,7 @@ class BoardTableViewCell: UITableViewCell {
         
         return view
     }()
-    
-//    lazy var collectionView = {
-//        
-//        let view = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
-//        view.isScrollEnabled = true
-//        view.showsHorizontalScrollIndicator = true
-//        view.register(PostCollectionViewCell.self, forCellWithReuseIdentifier: "PostCollectionViewCell")
-//        return view
-//    }()
-//    
-//    private func collectionViewLayout() -> UICollectionViewFlowLayout {
-//        let layout = UICollectionViewFlowLayout()
-//        layout.scrollDirection = .horizontal
-//        layout.minimumLineSpacing = 8
-//        layout.minimumInteritemSpacing = 8
-//        let size = UIScreen.main.bounds.width - 40
-//        layout.itemSize = CGSize(width: size, height: size)
-//        return layout
-//    }
+
     
     let foodImage = {
         let view = UIImageView()
@@ -154,11 +136,6 @@ class BoardTableViewCell: UITableViewCell {
             make.top.equalTo(userLabel.snp.bottom).offset(4)
             make.height.equalTo(18)
         }
-//        collectionView.snp.makeConstraints { make in
-//            make.size.equalTo(UIScreen.main.bounds.width - 40)
-//            make.horizontalEdges.equalToSuperview().inset(20)
-//            make.top.equalTo(dateLabel.snp.bottom).offset(10)
-//        }
         foodImage.snp.makeConstraints { make in
             make.size.equalTo(UIScreen.main.bounds.width - 40)
             make.horizontalEdges.equalToSuperview().inset(20)

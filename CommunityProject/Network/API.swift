@@ -18,6 +18,7 @@ enum SeSacAPI {
     case getPost(parameter: GetPost)
     case getMyProfile
     case editMyProfile(model: MyProfileModel)
+    case like
 }
 
 extension SeSacAPI: TargetType {
@@ -27,7 +28,7 @@ extension SeSacAPI: TargetType {
         switch self {
         case .join, .login, .emailValidation, .refresh, .withdraw:
             URL(string: APIkey.testURL)!
-        case .post, .getPost, .getMyProfile, .editMyProfile:
+        case .post, .getPost, .getMyProfile, .editMyProfile, .like:
             URL(string: APIkey.baseURL)!
         }
     
@@ -49,12 +50,14 @@ extension SeSacAPI: TargetType {
             "post"
         case .getMyProfile, .editMyProfile:
             "profile/me"
+        case .like:
+            "post/like"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .join, .login, .emailValidation, .post:
+        case .join, .login, .emailValidation, .post, .like:
             return .post
         case .getPost, .refresh, .withdraw, .getMyProfile:
             return .get
@@ -122,6 +125,8 @@ extension SeSacAPI: TargetType {
                 formData.append(MultipartFormData(provider: .data(profile), name: "profile", fileName: "profile.jpeg", mimeType: "image/jpeg"))
             }
             return .uploadMultipart(formData)
+        case .like:
+            return .requestPlain
         }
         
     }
@@ -142,7 +147,7 @@ extension SeSacAPI: TargetType {
              "SesacKey" : APIkey.sesacKey,
              "Refresh" : UserDefaults.standard.string(forKey: "refreshToken") ?? ""]
         
-        case .withdraw, .getPost, .getMyProfile:
+        case .withdraw, .getPost, .getMyProfile, .like:
              ["Authorization" : UserDefaults.standard.string(forKey: "token") ?? "",
              "SesacKey" : APIkey.sesacKey]
         }

@@ -126,3 +126,7 @@ struct MyProfileModel: Encodable {
 struct LikeResponse: Decodable {
     let like_status: Bool
 }
+
+struct CommentPostData: Encodable {
+    let content: String
+}

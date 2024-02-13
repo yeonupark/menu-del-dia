@@ -56,6 +56,28 @@ class BoardViewController: UIViewController {
                 cell.contentLabel.text = element.content
                 cell.hashtagLabel.text = element.content1
                 
+                cell.likeButton.rx.tap
+                    .observe(on: MainScheduler.instance)
+                    .subscribe(with: self) { owner, _ in
+                        owner.viewModel.likeButtonClicked(element._id) { result in
+                            if result {
+                                cell.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+                                cell.likeButton.tintColor = .red
+                                
+                            } else {
+                                cell.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+                                cell.likeButton.tintColor = .black
+                            }
+                        }
+                    }
+                    .disposed(by: self.disposeBag)
+                cell.commentButton.rx.tap
+                    .observe(on: MainScheduler.instance)
+                    .subscribe(with: self) { owner, _ in
+                        owner.viewModel.postComment(id: element._id, content: "사진 예뻐요!")
+                    }
+                    .disposed(by: self.disposeBag)
+                
                 let modifier = AnyModifier { request in
                     var r = request
                     r.setValue(APIkey.sesacKey, forHTTPHeaderField: "SesacKey")
@@ -110,19 +132,17 @@ class BoardViewController: UIViewController {
     }
 }
 
-extension BoardViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "BoardTableViewCell", for: indexPath) as? BoardTableViewCell else {
-            return UITableViewCell()
-        }
-        
-        return cell
-    }
-    
-    
-}
+//extension BoardViewController: UITableViewDelegate, UITableViewDataSource {
+//    
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return 5
+//    }
+//    
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "BoardTableViewCell", for: indexPath) as? BoardTableViewCell else {
+//            return UITableViewCell()
+//        }
+//        
+//        return cell
+//    }
+//}

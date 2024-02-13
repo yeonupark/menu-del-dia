@@ -41,26 +41,52 @@ class BoardViewModel {
         }
     }
     
-    func likeButtonClicked(_ id: String) {
-        provider.request(.like) { result in
+    func likeButtonClicked(_ id: String, completionHandler: @escaping (Bool) -> Void) {
+        provider.request(.like(id: id)) { result in
             switch result {
             case .success(let response):
                 if (200..<300).contains(response.statusCode) {
-                    print("like success - ", response.statusCode, response.data)
                     
                     do {
-                        let result = try JSONDecoder().decode(GetPostResponse.self, from: response.data)
-                        
+                        let result = try JSONDecoder().decode(LikeResponse.self, from: response.data)
+                        print("like success - ", result)
+                        completionHandler(result.like_status)
                     } catch {
-                        print("like error")
+                        print("like decoding error")
+                        completionHandler(false)
                     }
                     
                 } else if (400..<501).contains(response.statusCode) {
                     print("like failure - ", response.statusCode, response.data)
+                    completionHandler(false)
                 }
                 
             case .failure(let error):
                 print("like error - ", error)
+                completionHandler(false)
+            }
+        }
+    }
+    
+    func postComment(id: String, content: String) {
+        provider.request(.comment(id: id, content: content)) { result in
+            switch result {
+            case .success(let response):
+                if (200..<300).contains(response.statusCode) {
+                    
+                    do {
+                        let result = try JSONDecoder().decode(Comment.self, from: response.data)
+                        print("comment send success - ", result)
+                    } catch {
+                        print("comment send decoding error")
+                    }
+                    
+                } else if (400..<501).contains(response.statusCode) {
+                    print("comment send failure - ", response.statusCode, response.data)
+                }
+                
+            case .failure(let error):
+                print("comment send error - ", error)
             }
         }
     }

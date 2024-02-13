@@ -37,7 +37,6 @@ class BoardTableViewCell: UITableViewCell {
         
         return view
     }()
-
     
     let foodImage = {
         let view = UIImageView()
@@ -71,15 +70,8 @@ class BoardTableViewCell: UITableViewCell {
     let likeButton = {
         let view = UIButton()
         view.setImage(UIImage(systemName: "heart"), for: .normal)
-        view.tintColor = .clear
-        
-        return view
-    }()
-    
-    let likeButtonImage = {
-        let view = UIImageView()
-        view.image = UIImage(systemName: "heart")
         view.tintColor = .black
+        view.isUserInteractionEnabled = true
         
         return view
     }()
@@ -87,15 +79,23 @@ class BoardTableViewCell: UITableViewCell {
     let commentButton = {
         let view = UIButton()
         view.setImage(UIImage(systemName: "bubble.left"), for: .normal)
+        view.tintColor = .black
+        
+        return view
+    }()
+    
+    let moreCommentButton = {
+        let view = UIButton()
+        view.setTitle("hello", for: .normal)
         view.tintColor = .clear
         
         return view
     }()
-
-    let commentButtonImage = {
-        let view = UIImageView()
-        view.image = UIImage(systemName: "bubble.left")
-        view.tintColor = .black
+    
+    let moreCommentLabel = {
+        let view = UILabel()
+        view.text = "view 5 comments"
+        view.tintColor = .lightGray
         
         return view
     }()
@@ -112,9 +112,9 @@ class BoardTableViewCell: UITableViewCell {
     
     func configure() {
         
-        self.isUserInteractionEnabled = false
+        self.isUserInteractionEnabled = true
         
-        for item in [profileImage, userLabel, dateLabel, foodImage, titleLabel, contentLabel, hashtagLabel, likeButton, likeButtonImage, commentButton, commentButtonImage] {
+        for item in [profileImage, userLabel, dateLabel, foodImage, titleLabel, contentLabel, hashtagLabel, likeButton, commentButton, moreCommentButton, moreCommentLabel] {
             contentView.addSubview(item)
         }
     }
@@ -123,12 +123,12 @@ class BoardTableViewCell: UITableViewCell {
         
         profileImage.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(20)
-            make.top.equalToSuperview().inset(5)
+            make.top.equalToSuperview().inset(10)
             make.size.equalTo(50)
         }
         userLabel.snp.makeConstraints { make in
             make.leading.equalTo(profileImage.snp.trailing).offset(5)
-            make.top.equalToSuperview().inset(10)
+            make.top.equalToSuperview().inset(15)
             make.height.equalTo(18)
         }
         dateLabel.snp.makeConstraints { make in
@@ -139,10 +139,10 @@ class BoardTableViewCell: UITableViewCell {
         foodImage.snp.makeConstraints { make in
             make.size.equalTo(UIScreen.main.bounds.width - 40)
             make.horizontalEdges.equalToSuperview().inset(20)
-            make.top.equalTo(dateLabel.snp.bottom).offset(10)
+            make.top.equalTo(dateLabel.snp.bottom).offset(15)
         }
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(foodImage.snp.bottom).offset(7)
+            make.top.equalTo(foodImage.snp.bottom).offset(10)
             make.leading.equalToSuperview().inset(20)
             make.height.equalTo(20)
         }
@@ -159,18 +159,20 @@ class BoardTableViewCell: UITableViewCell {
         likeButton.snp.makeConstraints { make in
             make.top.equalTo(hashtagLabel.snp.bottom).offset(7)
             make.leading.equalToSuperview().inset(20)
-            make.size.equalTo(28)
-        }
-        likeButtonImage.snp.makeConstraints { make in
-            make.edges.equalTo(likeButton)
+            make.size.equalTo(24)
         }
         commentButton.snp.makeConstraints { make in
             make.top.equalTo(hashtagLabel.snp.bottom).offset(7)
             make.leading.equalTo(likeButton.snp.trailing).offset(10)
-            make.size.equalTo(28)
+            make.size.equalTo(24)
         }
-        commentButtonImage.snp.makeConstraints { make in
-            make.edges.equalTo(commentButton)
+        moreCommentButton.snp.makeConstraints { make in
+            make.top.equalTo(likeButton.snp.bottom).offset(7)
+            make.bottom.equalToSuperview().inset(10)
+            make.leading.equalToSuperview().inset(20)
+        }
+        moreCommentLabel.snp.makeConstraints { make in
+            make.edges.equalTo(moreCommentButton)
         }
     }
     

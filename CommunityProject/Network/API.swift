@@ -18,7 +18,8 @@ enum SeSacAPI {
     case getPost(parameter: GetPost)
     case getMyProfile
     case editMyProfile(model: MyProfileModel)
-    case like
+    case like(id: String)
+    case comment(id: String, content: String)
 }
 
 extension SeSacAPI: TargetType {
@@ -28,7 +29,7 @@ extension SeSacAPI: TargetType {
         switch self {
         case .join, .login, .emailValidation, .refresh, .withdraw:
             URL(string: APIkey.testURL)!
-        case .post, .getPost, .getMyProfile, .editMyProfile, .like:
+        case .post, .getPost, .getMyProfile, .editMyProfile, .like, .comment:
             URL(string: APIkey.baseURL)!
         }
     
@@ -50,14 +51,16 @@ extension SeSacAPI: TargetType {
             "post"
         case .getMyProfile, .editMyProfile:
             "profile/me"
-        case .like:
-            "post/like"
+        case .like(let id):
+            "post/like/\(id)"
+        case .comment(let id, _):
+            "post/\(id)/comment"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .join, .login, .emailValidation, .post, .like:
+        case .join, .login, .emailValidation, .post, .like, .comment:
             return .post
         case .getPost, .refresh, .withdraw, .getMyProfile:
             return .get
@@ -127,6 +130,8 @@ extension SeSacAPI: TargetType {
             return .uploadMultipart(formData)
         case .like:
             return .requestPlain
+        case .comment(_, let comment):
+            return .requestJSONEncodable(CommentPostData(content: comment))
         }
         
     }
@@ -149,6 +154,10 @@ extension SeSacAPI: TargetType {
         
         case .withdraw, .getPost, .getMyProfile, .like:
              ["Authorization" : UserDefaults.standard.string(forKey: "token") ?? "",
+             "SesacKey" : APIkey.sesacKey]
+        case .comment:
+            ["Authorization" : UserDefaults.standard.string(forKey: "token") ?? "",
+             "Content-Type" : "application/json",
              "SesacKey" : APIkey.sesacKey]
         }
         

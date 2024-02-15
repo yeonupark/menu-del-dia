@@ -14,8 +14,8 @@
             filePath = "CommunityProject/Network/API.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
             landmarkName = "task"
             landmarkType = "24">
             <Locations>
@@ -92,8 +92,8 @@
             filePath = "CommunityProject/Board/BoardTableViewCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
             landmarkName = "dateLabel"
             landmarkType = "24">
          </BreakpointContent>

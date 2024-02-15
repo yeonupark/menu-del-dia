@@ -130,3 +130,9 @@ struct LikeResponse: Decodable {
 struct CommentPostData: Encodable {
     let content: String
 }
+
+struct FollowResponse: Decodable {
+    let user: String
+    let following: String
+    let following_status: Bool
+}

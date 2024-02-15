@@ -45,6 +45,11 @@
 		48DA232F2B1496B400A6FD56 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA232E2B1496B400A6FD56 /* PostView.swift */; };
 		48DA23312B14992100A6FD56 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA23302B14992100A6FD56 /* PostViewController.swift */; };
 		48DA23332B14A16900A6FD56 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA23322B14A16900A6FD56 /* PostViewModel.swift */; };
+		48F698942B7D3B7100EF5201 /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = 48F698932B7D3B7100EF5201 /* FloatingPanel */; };
+		48F698962B7D3D1500EF5201 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F698952B7D3D1500EF5201 /* CommentView.swift */; };
+		48F698982B7D3E3500EF5201 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F698972B7D3E3500EF5201 /* CommentViewController.swift */; };
+		48F6989A2B7D9D8400EF5201 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F698992B7D9D8400EF5201 /* CommentTableViewCell.swift */; };
+		48F6989F2B7DB28B00EF5201 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 48F6989E2B7DB28B00EF5201 /* Toast */; };
 		48F8B2302B15BFAC0096A108 /* BoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F8B22F2B15BFAC0096A108 /* BoardViewModel.swift */; };
 		48F8B24D2B174A140096A108 /* BoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F8B24C2B174A140096A108 /* BoardTableViewCell.swift */; };
 		48F8B27B2B1863090096A108 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F8B27A2B1863090096A108 /* MyPageViewModel.swift */; };
@@ -108,6 +113,9 @@
 		48DA232E2B1496B400A6FD56 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 		48DA23302B14992100A6FD56 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		48DA23322B14A16900A6FD56 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
+		48F698952B7D3D1500EF5201 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
+		48F698972B7D3E3500EF5201 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
+		48F698992B7D9D8400EF5201 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		48F8B22F2B15BFAC0096A108 /* BoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewModel.swift; sourceTree = "<group>"; };
 		48F8B24C2B174A140096A108 /* BoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTableViewCell.swift; sourceTree = "<group>"; };
 		48F8B27A2B1863090096A108 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
@@ -120,11 +128,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48F6989F2B7DB28B00EF5201 /* Toast in Frameworks */,
 				48F8B2BC2B1E2A1C0096A108 /* Kingfisher in Frameworks */,
 				4849B3672B0A0DC800CBE244 /* RxRelay in Frameworks */,
 				48DA23022B0F384600A6FD56 /* Moya in Frameworks */,
 				4849B3652B0A0DC800CBE244 /* RxCocoa in Frameworks */,
 				4849B3692B0A0DC800CBE244 /* RxSwift in Frameworks */,
+				48F698942B7D3B7100EF5201 /* FloatingPanel in Frameworks */,
 				4849B35B2B08551200CBE244 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,6 +277,9 @@
 				48DA231B2B1370B800A6FD56 /* BoardView.swift */,
 				48F8B22F2B15BFAC0096A108 /* BoardViewModel.swift */,
 				48F8B24C2B174A140096A108 /* BoardTableViewCell.swift */,
+				48F698952B7D3D1500EF5201 /* CommentView.swift */,
+				48F698972B7D3E3500EF5201 /* CommentViewController.swift */,
+				48F698992B7D9D8400EF5201 /* CommentTableViewCell.swift */,
 			);
 			path = Board;
 			sourceTree = "<group>";
@@ -305,6 +318,8 @@
 				4849B3682B0A0DC800CBE244 /* RxSwift */,
 				48DA23012B0F384600A6FD56 /* Moya */,
 				48F8B2BB2B1E2A1C0096A108 /* Kingfisher */,
+				48F698932B7D3B7100EF5201 /* FloatingPanel */,
+				48F6989E2B7DB28B00EF5201 /* Toast */,
 			);
 			productName = CommunityProject;
 			productReference = 4849B30C2B035FB800CBE244 /* CommunityProject.app */;
@@ -383,6 +398,8 @@
 				4849B3632B0A0DC800CBE244 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				48DA23002B0F384600A6FD56 /* XCRemoteSwiftPackageReference "Moya" */,
 				48F8B2BA2B1E2A1C0096A108 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				48F698922B7D3B7100EF5201 /* XCRemoteSwiftPackageReference "FloatingPanel" */,
+				48F6989D2B7DB28B00EF5201 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 			);
 			productRefGroup = 4849B30D2B035FB800CBE244 /* Products */;
 			projectDirPath = "";
@@ -451,14 +468,17 @@
 				4849B3582B08547800CBE244 /* BaseView.swift in Sources */,
 				48DA23312B14992100A6FD56 /* PostViewController.swift in Sources */,
 				48C0459B2B29A54200C1139A /* SettingView.swift in Sources */,
+				48F6989A2B7D9D8400EF5201 /* CommentTableViewCell.swift in Sources */,
 				48DA231A2B1370A300A6FD56 /* BoardViewController.swift in Sources */,
 				48DA230E2B10406C00A6FD56 /* LoginViewModel.swift in Sources */,
 				4849B3432B0362A900CBE244 /* LoginView.swift in Sources */,
+				48F698962B7D3D1500EF5201 /* CommentView.swift in Sources */,
 				48F99E072B21777100E06083 /* PostCollectionViewCell.swift in Sources */,
 				4849B35E2B085B3C00CBE244 /* SignUpView.swift in Sources */,
 				48DA232F2B1496B400A6FD56 /* PostView.swift in Sources */,
 				4849B3122B035FB800CBE244 /* SceneDelegate.swift in Sources */,
 				48F8B2302B15BFAC0096A108 /* BoardViewModel.swift in Sources */,
+				48F698982B7D3E3500EF5201 /* CommentViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -839,6 +859,22 @@
 				minimumVersion = 15.0.3;
 			};
 		};
+		48F698922B7D3B7100EF5201 /* XCRemoteSwiftPackageReference "FloatingPanel" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scenee/FloatingPanel.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.1;
+			};
+		};
+		48F6989D2B7DB28B00EF5201 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.0;
+			};
+		};
 		48F8B2BA2B1E2A1C0096A108 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -874,6 +910,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 48DA23002B0F384600A6FD56 /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
+		};
+		48F698932B7D3B7100EF5201 /* FloatingPanel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 48F698922B7D3B7100EF5201 /* XCRemoteSwiftPackageReference "FloatingPanel" */;
+			productName = FloatingPanel;
+		};
+		48F6989E2B7DB28B00EF5201 /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 48F6989D2B7DB28B00EF5201 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
 		};
 		48F8B2BB2B1E2A1C0096A108 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;

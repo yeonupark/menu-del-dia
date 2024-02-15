@@ -22,6 +22,13 @@ class BoardTableViewCell: UITableViewCell {
         return view
     }()
     
+    let profileImageButton = {
+        let view = UIButton()
+        view.tintColor = .clear
+        
+        return view
+    }()
+    
     let userLabel = {
         let view = UILabel()
         view.text = "아이디"
@@ -60,12 +67,12 @@ class BoardTableViewCell: UITableViewCell {
         return view
     }()
     
-    let hashtagLabel = {
-        let view = UILabel()
-        view.font = .systemFont(ofSize: 15)
-        
-        return view
-    }()
+//    let hashtagLabel = {
+//        let view = UILabel()
+//        view.font = .systemFont(ofSize: 15)
+//        
+//        return view
+//    }()
     
     let likeButton = {
         let view = UIButton()
@@ -95,7 +102,7 @@ class BoardTableViewCell: UITableViewCell {
     let moreCommentLabel = {
         let view = UILabel()
         view.text = "view 5 comments"
-        view.tintColor = .lightGray
+        view.textColor = .lightGray
         
         return view
     }()
@@ -114,7 +121,7 @@ class BoardTableViewCell: UITableViewCell {
         
         self.isUserInteractionEnabled = true
         
-        for item in [profileImage, userLabel, dateLabel, foodImage, titleLabel, contentLabel, hashtagLabel, likeButton, commentButton, moreCommentButton, moreCommentLabel] {
+        for item in [profileImage, profileImageButton, userLabel, dateLabel, foodImage, titleLabel, contentLabel, likeButton, commentButton, moreCommentButton, moreCommentLabel] {
             contentView.addSubview(item)
         }
     }
@@ -125,6 +132,9 @@ class BoardTableViewCell: UITableViewCell {
             make.leading.equalToSuperview().inset(20)
             make.top.equalToSuperview().inset(10)
             make.size.equalTo(50)
+        }
+        profileImageButton.snp.makeConstraints { make in
+            make.edges.equalTo(profileImage)
         }
         userLabel.snp.makeConstraints { make in
             make.leading.equalTo(profileImage.snp.trailing).offset(5)
@@ -151,18 +161,18 @@ class BoardTableViewCell: UITableViewCell {
             make.leading.equalToSuperview().inset(20)
             make.height.equalTo(20)
         }
-        hashtagLabel.snp.makeConstraints { make in
-            make.top.equalTo(contentLabel.snp.bottom).offset(7)
-            make.leading.equalToSuperview().inset(20)
-            make.height.equalTo(20)
-        }
+//        hashtagLabel.snp.makeConstraints { make in
+//            make.top.equalTo(contentLabel.snp.bottom).offset(7)
+//            make.leading.equalToSuperview().inset(20)
+//            make.height.equalTo(20)
+//        }
         likeButton.snp.makeConstraints { make in
-            make.top.equalTo(hashtagLabel.snp.bottom).offset(7)
+            make.top.equalTo(contentLabel.snp.bottom).offset(7)
             make.leading.equalToSuperview().inset(20)
             make.size.equalTo(24)
         }
         commentButton.snp.makeConstraints { make in
-            make.top.equalTo(hashtagLabel.snp.bottom).offset(7)
+            make.top.equalTo(contentLabel.snp.bottom).offset(7)
             make.leading.equalTo(likeButton.snp.trailing).offset(10)
             make.size.equalTo(24)
         }

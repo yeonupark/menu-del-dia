@@ -28,6 +28,8 @@ class PostViewController: UIViewController {
         
         bindCollectionView()
         bind()
+        
+        navigationController?.navigationBar.tintColor = .black
     }
     
     func checkAuthorization() {
@@ -81,10 +83,12 @@ class PostViewController: UIViewController {
     
     func bindCollectionView() {
         imageList
-            .bind(to: mainView.collectionView.rx.items(cellIdentifier: "PostCollectionViewCell", cellType: PostCollectionViewCell.self)) { (row, element, cell) in
-                
-                cell.imageView.image = element
-            }
+            .map { $0.first }
+            .bind(to: mainView.imageView.rx.image)
+//            .bind(to: mainView.collectionView.rx.items(cellIdentifier: "PostCollectionViewCell", cellType: PostCollectionViewCell.self)) { (row, element, cell) in
+//                
+//                cell.imageView.image = element
+//            }
             .disposed(by: disposeBag)
     }
     
@@ -95,9 +99,9 @@ class PostViewController: UIViewController {
         viewModel.content
             .bind(to: mainView.contentField.rx.text)
             .disposed(by: disposeBag)
-        viewModel.hashTag
-            .bind(to: mainView.hashtagField.rx.text)
-            .disposed(by: disposeBag)
+//        viewModel.hashTag
+//            .bind(to: mainView.hashtagField.rx.text)
+//            .disposed(by: disposeBag)
         
         mainView.titleField
             .rx
@@ -113,12 +117,12 @@ class PostViewController: UIViewController {
             .orEmpty
             .bind(to: viewModel.content)
             .disposed(by: disposeBag)
-        mainView.hashtagField
-            .rx
-            .text
-            .orEmpty
-            .bind(to: viewModel.hashTag)
-            .disposed(by: disposeBag)
+//        mainView.hashtagField
+//            .rx
+//            .text
+//            .orEmpty
+//            .bind(to: viewModel.hashTag)
+//            .disposed(by: disposeBag)
         
         let post = Observable.combineLatest(viewModel.title, viewModel.content, viewModel.hashTag, viewModel.imageData) { title, content, hashtag, images in
             return PostModel(title: title, content: content, file: images, product_id: "tmm", content1: hashtag, content2: nil)

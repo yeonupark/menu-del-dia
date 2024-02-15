@@ -38,7 +38,7 @@ class MyPageViewModel: BaseViewModel {
                         self.post.accept(result.posts.count)
                         self.follower.accept(result.followers.count)
                         self.following.accept(result.following.count)
-                        
+                        print(result)
                         completionHandler(200)
                         
                     } catch {

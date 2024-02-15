@@ -20,6 +20,8 @@ enum SeSacAPI {
     case editMyProfile(model: MyProfileModel)
     case like(id: String)
     case comment(id: String, content: String)
+    case follow(id: String)
+    case unfollow(id: String)
 }
 
 extension SeSacAPI: TargetType {
@@ -29,7 +31,7 @@ extension SeSacAPI: TargetType {
         switch self {
         case .join, .login, .emailValidation, .refresh, .withdraw:
             URL(string: APIkey.testURL)!
-        case .post, .getPost, .getMyProfile, .editMyProfile, .like, .comment:
+        case .post, .getPost, .getMyProfile, .editMyProfile, .like, .comment, .follow, .unfollow:
             URL(string: APIkey.baseURL)!
         }
     
@@ -55,17 +57,21 @@ extension SeSacAPI: TargetType {
             "post/like/\(id)"
         case .comment(let id, _):
             "post/\(id)/comment"
+        case .follow(let id), .unfollow(let id):
+            "follow/\(id)"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .join, .login, .emailValidation, .post, .like, .comment:
+        case .join, .login, .emailValidation, .post, .like, .comment, .follow:
             return .post
         case .getPost, .refresh, .withdraw, .getMyProfile:
             return .get
         case .editMyProfile:
             return .put
+        case .unfollow:
+            return .delete
         }
     }
     
@@ -132,6 +138,10 @@ extension SeSacAPI: TargetType {
             return .requestPlain
         case .comment(_, let comment):
             return .requestJSONEncodable(CommentPostData(content: comment))
+        case .follow:
+            return .requestPlain
+        case .unfollow:
+            return .requestPlain
         }
         
     }
@@ -152,7 +162,7 @@ extension SeSacAPI: TargetType {
              "SesacKey" : APIkey.sesacKey,
              "Refresh" : UserDefaults.standard.string(forKey: "refreshToken") ?? ""]
         
-        case .withdraw, .getPost, .getMyProfile, .like:
+        case .withdraw, .getPost, .getMyProfile, .like, .follow, .unfollow:
              ["Authorization" : UserDefaults.standard.string(forKey: "token") ?? "",
              "SesacKey" : APIkey.sesacKey]
         case .comment:

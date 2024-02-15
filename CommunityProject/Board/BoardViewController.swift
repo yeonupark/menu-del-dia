@@ -8,8 +8,12 @@
 import UIKit
 import RxSwift
 import Kingfisher
+import FloatingPanel
+import Toast
 
-class BoardViewController: UIViewController {
+class BoardViewController: UIViewController, FloatingPanelControllerDelegate {
+    
+    var fpc: FloatingPanelController!
     
     let mainView = BoardView()
     
@@ -54,7 +58,8 @@ class BoardViewController: UIViewController {
                 cell.dateLabel.text = "\(day) \(time)"
                 cell.titleLabel.text = element.title
                 cell.contentLabel.text = element.content
-                cell.hashtagLabel.text = element.content1
+                //cell.hashtagLabel.text = element.content1
+                cell.moreCommentLabel.text = "view \(element.comments.count) comments"
                 
                 cell.likeButton.rx.tap
                     .observe(on: MainScheduler.instance)
@@ -74,7 +79,31 @@ class BoardViewController: UIViewController {
                 cell.commentButton.rx.tap
                     .observe(on: MainScheduler.instance)
                     .subscribe(with: self) { owner, _ in
-                        owner.viewModel.postComment(id: element._id, content: "사진 예뻐요!")
+                        owner.makeComment(id: element._id)
+                    }
+                    .disposed(by: self.disposeBag)
+                
+                cell.moreCommentButton.rx.tap
+                    .observe(on: MainScheduler.instance)
+                    .subscribe(with: self) { owner, _ in
+                        owner.setFPC(commentData: element.comments)
+                    }
+                    .disposed(by: self.disposeBag)
+                
+                cell.profileImageButton.rx.tap
+                    .observe(on: MainScheduler.instance)
+                    .subscribe(with: self) { owner, _ in
+                        owner.viewModel.follow(element.creator._id) { result in
+                            if result {
+                                owner.mainView.makeToast("\(element.creator.nick)님을 팔로우합니다.", position: .top)
+                            } else {
+                                owner.viewModel.unfollow(element.creator._id) { unfollowResult in
+                                    if unfollowResult {
+                                        owner.mainView.makeToast("\(element.creator.nick)님을 언팔로우합니다.", position: .top)
+                                    }
+                                }
+                            }
+                        }
                     }
                     .disposed(by: self.disposeBag)
                 
@@ -113,9 +142,37 @@ class BoardViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
+    func makeComment(id: String) {
+        let alert = UIAlertController(title: "댓글을 입력하세요", message: nil, preferredStyle: .alert)
+        alert.addTextField { tf in
+            tf.placeholder = "코멘트 입력"
+        }
+        let okAction = UIAlertAction(title: "Ok", style: .default) { action in
+            if let tf = alert.textFields?.first {
+                self.viewModel.postComment(id: id, content: tf.text ?? "맛있겠다 ㅠㅠ")
+            }
+        }
+        alert.addAction(okAction)
+        present(alert, animated: true)
+    }
+    
+    func setFPC(commentData: [Comment?]) {
+        let vc = CommentViewController()
+        vc.commentData.accept(commentData)
+        
+        fpc = FloatingPanelController()
+        fpc.delegate = self
+        
+        fpc.set(contentViewController: vc)
+        fpc.isRemovalInteractionEnabled = true
+        fpc.changePanelStyle()
+        
+        self.present(fpc, animated: true, completion: nil)
+    }
+    
     func setNavigationBar() {
         navigationItem.hidesBackButton = true
-        let myPageButton = UIBarButtonItem(title: "MY", style: .plain, target: self, action: #selector(myPageButtonClicked))
+        let myPageButton = UIBarButtonItem(image: UIImage(systemName: "person.crop.circle"), style: .plain, target: self, action: #selector(myPageButtonClicked))
         myPageButton.tintColor = .black
         
         navigationItem.setRightBarButton(myPageButton, animated: true)
@@ -132,17 +189,22 @@ class BoardViewController: UIViewController {
     }
 }
 
-//extension BoardViewController: UITableViewDelegate, UITableViewDataSource {
-//    
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 5
-//    }
-//    
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "BoardTableViewCell", for: indexPath) as? BoardTableViewCell else {
-//            return UITableViewCell()
-//        }
-//        
-//        return cell
-//    }
-//}
+extension FloatingPanelController {
+    func changePanelStyle() {
+        let appearance = SurfaceAppearance()
+        let shadow = SurfaceAppearance.Shadow()
+        shadow.color = UIColor.black
+        shadow.offset = CGSize(width: 0, height: -4.0)
+        shadow.opacity = 0.15
+        shadow.radius = 2
+        appearance.shadows = [shadow]
+        appearance.cornerRadius = 15.0
+        appearance.backgroundColor = .clear
+        appearance.borderColor = .clear
+        appearance.borderWidth = 0
+
+        surfaceView.grabberHandle.isHidden = true
+        surfaceView.appearance = appearance
+
+    }
+}

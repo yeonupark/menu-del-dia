@@ -13,7 +13,7 @@ class BoardView: BaseView {
         let view = UITableView()
         view.register(BoardTableViewCell.self, forCellReuseIdentifier: "BoardTableViewCell")
         view.backgroundColor = .clear
-        view.rowHeight = 186 + UIScreen.main.bounds.width
+        view.rowHeight = 150 + UIScreen.main.bounds.width
         
         return view
     }()
@@ -29,14 +29,18 @@ class BoardView: BaseView {
     let postButton = {
         let view = UIButton()
         view.setImage(UIImage(systemName: "camera.circle"), for: .normal)
+        view.backgroundColor = .white
         view.tintColor = .clear
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 35
         return view
     }()
     
     let postLabel = {
         let view = UILabel()
-        view.text = "Post What You Ate Today"
-        view.font = .boldSystemFont(ofSize: 14)
+        view.text = "* Post What You Ate Today *"
+        view.backgroundColor = .white
+        view.font = .boldSystemFont(ofSize: 13)
         
         return view
     }()

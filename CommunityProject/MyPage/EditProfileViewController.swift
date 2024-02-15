@@ -37,6 +37,8 @@ class EditProfileViewController: UIViewController {
     }
     
     func setNavigationBar() {
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.title = "Edit Profile"
         let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: nil)
 
         navigationItem.setRightBarButton(saveButton, animated: true)

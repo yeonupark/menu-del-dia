@@ -90,4 +90,58 @@ class BoardViewModel {
             }
         }
     }
+    
+    func follow(_ id: String, completionHandler: @escaping (Bool) -> Void) {
+        provider.request(.follow(id: id)) { result in
+            switch result {
+            case .success(let response):
+                if (200..<300).contains(response.statusCode) {
+                    
+                    do {
+                        let result = try JSONDecoder().decode(FollowResponse.self, from: response.data)
+                        print("follow success - ", result)
+                        completionHandler(result.following_status)
+                    } catch {
+                        print("follow decoding error")
+                        completionHandler(false)
+                    }
+                    
+                } else if (400..<501).contains(response.statusCode) {
+                    print("follow failure - ", response.statusCode, response.data)
+                    completionHandler(false)
+                }
+                
+            case .failure(let error):
+                print("follow error - ", error)
+                completionHandler(false)
+            }
+        }
+    }
+    
+    func unfollow(_ id: String, completionHandler: @escaping (Bool) -> Void) {
+        provider.request(.unfollow(id: id)) { result in
+            switch result {
+            case .success(let response):
+                if (200..<300).contains(response.statusCode) {
+                    
+                    do {
+                        let result = try JSONDecoder().decode(FollowResponse.self, from: response.data)
+                        print("unfollow success - ", result)
+                        completionHandler(result.following_status)
+                    } catch {
+                        print("unfollow decoding error")
+                        completionHandler(false)
+                    }
+                    
+                } else if (400..<501).contains(response.statusCode) {
+                    print("unfollow failure - ", response.statusCode, response.data)
+                    completionHandler(false)
+                }
+                
+            case .failure(let error):
+                print("unfollow error - ", error)
+                completionHandler(false)
+            }
+        }
+    }
 }

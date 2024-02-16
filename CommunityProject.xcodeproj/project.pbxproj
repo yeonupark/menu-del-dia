@@ -50,6 +50,8 @@
 		48F698982B7D3E3500EF5201 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F698972B7D3E3500EF5201 /* CommentViewController.swift */; };
 		48F6989A2B7D9D8400EF5201 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F698992B7D9D8400EF5201 /* CommentTableViewCell.swift */; };
 		48F6989F2B7DB28B00EF5201 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 48F6989E2B7DB28B00EF5201 /* Toast */; };
+		48F698A12B7F814D00EF5201 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F698A02B7F814D00EF5201 /* UserProfileViewController.swift */; };
+		48F698A32B7F827C00EF5201 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F698A22B7F827C00EF5201 /* UserViewModel.swift */; };
 		48F8B2302B15BFAC0096A108 /* BoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F8B22F2B15BFAC0096A108 /* BoardViewModel.swift */; };
 		48F8B24D2B174A140096A108 /* BoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F8B24C2B174A140096A108 /* BoardTableViewCell.swift */; };
 		48F8B27B2B1863090096A108 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F8B27A2B1863090096A108 /* MyPageViewModel.swift */; };
@@ -116,6 +118,8 @@
 		48F698952B7D3D1500EF5201 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
 		48F698972B7D3E3500EF5201 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		48F698992B7D9D8400EF5201 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
+		48F698A02B7F814D00EF5201 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		48F698A22B7F827C00EF5201 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		48F8B22F2B15BFAC0096A108 /* BoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewModel.swift; sourceTree = "<group>"; };
 		48F8B24C2B174A140096A108 /* BoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTableViewCell.swift; sourceTree = "<group>"; };
 		48F8B27A2B1863090096A108 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
@@ -280,6 +284,8 @@
 				48F698952B7D3D1500EF5201 /* CommentView.swift */,
 				48F698972B7D3E3500EF5201 /* CommentViewController.swift */,
 				48F698992B7D9D8400EF5201 /* CommentTableViewCell.swift */,
+				48F698A02B7F814D00EF5201 /* UserProfileViewController.swift */,
+				48F698A22B7F827C00EF5201 /* UserViewModel.swift */,
 			);
 			path = Board;
 			sourceTree = "<group>";
@@ -461,6 +467,7 @@
 				48DA231C2B1370B800A6FD56 /* BoardView.swift in Sources */,
 				48F8B27B2B1863090096A108 /* MyPageViewModel.swift in Sources */,
 				4849B3622B0A0A6800CBE244 /* SignUpViewModel.swift in Sources */,
+				48F698A12B7F814D00EF5201 /* UserProfileViewController.swift in Sources */,
 				48DA22B32B0E533900A6FD56 /* APIModel.swift in Sources */,
 				4849B3102B035FB800CBE244 /* AppDelegate.swift in Sources */,
 				48DA23152B136A2600A6FD56 /* MyPageView.swift in Sources */,
@@ -469,6 +476,7 @@
 				48DA23312B14992100A6FD56 /* PostViewController.swift in Sources */,
 				48C0459B2B29A54200C1139A /* SettingView.swift in Sources */,
 				48F6989A2B7D9D8400EF5201 /* CommentTableViewCell.swift in Sources */,
+				48F698A32B7F827C00EF5201 /* UserViewModel.swift in Sources */,
 				48DA231A2B1370A300A6FD56 /* BoardViewController.swift in Sources */,
 				48DA230E2B10406C00A6FD56 /* LoginViewModel.swift in Sources */,
 				4849B3432B0362A900CBE244 /* LoginView.swift in Sources */,

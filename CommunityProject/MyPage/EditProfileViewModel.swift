@@ -14,9 +14,9 @@ class EditProfileViewModel: BaseViewModel {
     let email = PublishRelay<String>()
     let profileUrl = PublishRelay<String>()// = PublishRelay<String>()
 
-    let nickname = BehaviorRelay(value: "ㅇㅇ") //= PublishRelay<String>()
-    let phoneNumber = BehaviorRelay(value: "ㅇㅇ")// = PublishRelay<String>()
-    let birthday = BehaviorRelay(value: "ㅇㅇ") // = PublishRelay<String>()
+    let nickname = BehaviorRelay(value: "") //= PublishRelay<String>()
+    let phoneNumber = BehaviorRelay(value: "")// = PublishRelay<String>()
+    let birthday = BehaviorRelay(value: "") // = PublishRelay<String>()
     
     let profileData = BehaviorRelay(value: Data())
     

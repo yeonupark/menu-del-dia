@@ -1,48 +1,48 @@
 //
-//  MyPageViewController.swift
+//  UserProfileViewController.swift
 //  CommunityProject
 //
-//  Created by Yeonu Park on 2023/11/26.
+//  Created by Yeonu Park on 2024/02/16.
 //
 
 import UIKit
 import RxSwift
 import Kingfisher
 
-class MyPageViewController: UIViewController {
-    
+class UserProfileViewController: UIViewController {
+
     let mainView = MyPageView()
     
     override func loadView() {
         view.self = mainView
     }
     
-    let viewModel = MyPageViewModel()
+    let viewModel = UserViewModel()
     let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setNavigationBar()
+        setFollowButton()
         bind()
-        fetchMyData()
+        fetchUserData()
         bindCollectionView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
-        fetchMyData()
-        viewModel.fetchMyPost(limit: "10", product_id: "tmm")
+        fetchUserData()
+        viewModel.fetchUserPost(limit: "10", product_id: "tmm")
     }
     
-    func fetchMyData() {
-        viewModel.getMyProfile { statusCode in
+    func fetchUserData() {
+        viewModel.getUserProfile { statusCode in
             if statusCode == 419 {
                 self.viewModel.callRefreshToken { value in
                     if value {
                         // 토큰 리프레쉬 성공. 탈퇴요청 다시
-                        self.viewModel.getMyProfile { code in
+                        self.viewModel.getUserProfile { code in
                             print("getMyProfile 재호출 결과 statusCode: \(code)")
                         }
                     } else {
@@ -55,7 +55,7 @@ class MyPageViewController: UIViewController {
     }
     
     func bindCollectionView() {
-        viewModel.myPostList
+        viewModel.userPostList
             .map { $0.data }
             .bind(to: mainView.collectionView.rx.items(cellIdentifier: "PostCollectionViewCell", cellType: PostCollectionViewCell.self)) { (row, element, cell) in
                 let postImageString = element.image[0]
@@ -119,28 +119,26 @@ class MyPageViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    func setNavigationBar() {
-        navigationItem.title = "My Profile"
-        let settingButton = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .plain, target: self, action: nil)
-        settingButton.tintColor = .black
-        
-        navigationItem.setRightBarButton(settingButton, animated: true)
-        
-        settingButton.rx
-            .tap
-            .observe(on: MainScheduler.instance)
-            .subscribe(with: self) { owner, _ in
-                let vc = SettingViewController()
-                owner.navigationController?.pushViewController(vc, animated: true)
-            }
-            .disposed(by: disposeBag)
+    func setFollowButton() {
+        mainView.editProfileButton.setTitle("  * follow * ", for: .normal)
+        mainView.editProfileButton.backgroundColor = .systemBlue
+        mainView.editProfileButton.setTitleColor(.white, for: .normal)
         
         mainView.editProfileButton.rx
             .tap
             .observe(on: MainScheduler.instance)
             .subscribe(with: self) { owner, _ in
-                let vc = EditProfileViewController()
-                owner.navigationController?.pushViewController(vc, animated: true)
+                owner.viewModel.follow(owner.viewModel.userID) { result in
+                    if result {
+                        owner.mainView.makeToast("\(owner.mainView.nicknameLabel.text ?? "")님을 팔로우합니다.", position: .top)
+                    } else {
+                        owner.viewModel.unfollow(owner.viewModel.userID) { unfollowResult in
+                            if unfollowResult {
+                                owner.mainView.makeToast("\(owner.mainView.nicknameLabel.text ?? "")님을 언팔로우합니다.", position: .top)
+                            }
+                        }
+                    }
+                }
             }
             .disposed(by: disposeBag)
     }

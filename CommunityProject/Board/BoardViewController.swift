@@ -93,17 +93,11 @@ class BoardViewController: UIViewController, FloatingPanelControllerDelegate {
                 cell.profileImageButton.rx.tap
                     .observe(on: MainScheduler.instance)
                     .subscribe(with: self) { owner, _ in
-                        owner.viewModel.follow(element.creator._id) { result in
-                            if result {
-                                owner.mainView.makeToast("\(element.creator.nick)님을 팔로우합니다.", position: .top)
-                            } else {
-                                owner.viewModel.unfollow(element.creator._id) { unfollowResult in
-                                    if unfollowResult {
-                                        owner.mainView.makeToast("\(element.creator.nick)님을 언팔로우합니다.", position: .top)
-                                    }
-                                }
-                            }
-                        }
+                        // 화면 이동
+                        let vc = UserProfileViewController()
+                        vc.viewModel.userID = element.creator._id
+                        
+                        owner.navigationController?.pushViewController(vc, animated: true)
                     }
                     .disposed(by: self.disposeBag)
                 

@@ -16,7 +16,9 @@ enum SeSacAPI {
     case withdraw
     case post(model: PostModel)
     case getPost(parameter: GetPost)
+    case getMyPost(parameter: GetPost, id: String)
     case getMyProfile
+    case getUserProfile(id: String)
     case editMyProfile(model: MyProfileModel)
     case like(id: String)
     case comment(id: String, content: String)
@@ -31,7 +33,7 @@ extension SeSacAPI: TargetType {
         switch self {
         case .join, .login, .emailValidation, .refresh, .withdraw:
             URL(string: APIkey.testURL)!
-        case .post, .getPost, .getMyProfile, .editMyProfile, .like, .comment, .follow, .unfollow:
+        case .post, .getPost, .getMyPost, .getMyProfile, .getUserProfile, .editMyProfile, .like, .comment, .follow, .unfollow:
             URL(string: APIkey.baseURL)!
         }
     
@@ -51,8 +53,12 @@ extension SeSacAPI: TargetType {
             "withdraw"
         case .post, .getPost:
             "post"
+        case .getMyPost(_, let id):
+            "post/user/\(id)"
         case .getMyProfile, .editMyProfile:
             "profile/me"
+        case .getUserProfile(let id):
+            "profile/\(id)"
         case .like(let id):
             "post/like/\(id)"
         case .comment(let id, _):
@@ -66,7 +72,7 @@ extension SeSacAPI: TargetType {
         switch self {
         case .join, .login, .emailValidation, .post, .like, .comment, .follow:
             return .post
-        case .getPost, .refresh, .withdraw, .getMyProfile:
+        case .getPost, .getMyPost, .refresh, .withdraw, .getMyProfile, .getUserProfile:
             return .get
         case .editMyProfile:
             return .put
@@ -116,7 +122,12 @@ extension SeSacAPI: TargetType {
         case .getPost(let parameters):
             let parameters = parameters.getParameters()
             return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
+        case .getMyPost(let parameters, _):
+            let parameters = parameters.getParameters()
+            return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
         case .getMyProfile:
+            return .requestPlain
+        case .getUserProfile:
             return .requestPlain
         case .editMyProfile(let model):
             var formData: [MultipartFormData] = []
@@ -162,7 +173,7 @@ extension SeSacAPI: TargetType {
              "SesacKey" : APIkey.sesacKey,
              "Refresh" : UserDefaults.standard.string(forKey: "refreshToken") ?? ""]
         
-        case .withdraw, .getPost, .getMyProfile, .like, .follow, .unfollow:
+        case .withdraw, .getPost, .getMyPost, .getMyProfile, .getUserProfile, .like, .follow, .unfollow:
              ["Authorization" : UserDefaults.standard.string(forKey: "token") ?? "",
              "SesacKey" : APIkey.sesacKey]
         case .comment:

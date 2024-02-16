@@ -136,3 +136,10 @@ struct FollowResponse: Decodable {
     let following: String
     let following_status: Bool
 }
+
+struct UserProfileResponse: Decodable {
+    let posts: [String]
+    let followers, following: [Creator]
+    let _id, nick: String
+    let profile: String?
+}

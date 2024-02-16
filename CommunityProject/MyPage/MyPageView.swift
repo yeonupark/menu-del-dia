@@ -35,6 +35,7 @@ class MyPageView: BaseView {
         view.setTitle("Edit profile", for: .normal)
         view.titleLabel?.font = .systemFont(ofSize: 14)
         view.setTitleColor(.systemBlue, for: .normal)
+        view.layer.cornerRadius = 5
         
         return view
     }()
@@ -108,10 +109,29 @@ class MyPageView: BaseView {
         return view
     }()
     
+    lazy var collectionView = {
+        
+        let view = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
+        view.isScrollEnabled = true
+        view.register(PostCollectionViewCell.self, forCellWithReuseIdentifier: "PostCollectionViewCell")
+        return view
+    }()
+        
+    private func collectionViewLayout() -> UICollectionViewFlowLayout {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 8
+        layout.minimumInteritemSpacing = 8
+        let size = UIScreen.main.bounds.width - 92
+        layout.itemSize = CGSize(width: size/3, height: size/3)
+        return layout
+    }
+    
+    
     override func configure() {
         super.configure()
         
-        for item in [profileImage, nicknameLabel, editProfileButton, postButton, followerButton, followingButton] {
+        for item in [profileImage, nicknameLabel, editProfileButton, postButton, followerButton, followingButton, collectionView] {
             addSubview(item)
         }
         
@@ -143,17 +163,17 @@ class MyPageView: BaseView {
             make.centerX.equalToSuperview()
         }
         postButton.snp.makeConstraints { make in
-            make.top.equalTo(editProfileButton.snp.bottom).offset(10)
+            make.top.equalTo(editProfileButton.snp.bottom)
             make.leading.equalToSuperview()
             make.size.equalTo(UIScreen.main.bounds.width/3)
         }
         followerButton.snp.makeConstraints { make in
-            make.top.equalTo(editProfileButton.snp.bottom).offset(10)
+            make.top.equalTo(editProfileButton.snp.bottom)
             make.leading.equalTo(postButton.snp.trailing)
             make.size.equalTo(UIScreen.main.bounds.width/3)
         }
         followingButton.snp.makeConstraints { make in
-            make.top.equalTo(editProfileButton.snp.bottom).offset(10)
+            make.top.equalTo(editProfileButton.snp.bottom)
             make.leading.equalTo(followerButton.snp.trailing)
             make.size.equalTo(UIScreen.main.bounds.width/3)
         }
@@ -183,6 +203,11 @@ class MyPageView: BaseView {
             make.centerX.equalToSuperview()
             make.top.equalTo(followingNumberLabel.snp.bottom).offset(4)
             make.height.equalTo(15)
+        }
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo(postButton.snp.bottom)
+            make.horizontalEdges.equalToSuperview().inset(30)
+            make.bottom.equalToSuperview().inset(100)
         }
     }
     

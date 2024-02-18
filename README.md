@@ -1,4 +1,5 @@
 # WIA: What I Ate
+![WIA](https://github.com/yeonupark/CommunityProject/assets/130972950/e32f8672-ee65-4a3d-99d9-519bbdf69839)
 
 ## 한 줄 소개
 
